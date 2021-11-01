@@ -9,6 +9,8 @@ import { MaterialModule } from './material/material.module';
 import { DealsComponent } from './home/deals/deals.component';
 import { IntroComponent } from './home/intro/intro.component';
 import { HomeComponent } from './home/home.component';
+import { ContactComponent } from './home/contact/contact.component';
+import { AboutComponent } from './home/about/about.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,9 @@ import { HomeComponent } from './home/home.component';
     NavbarComponent,
     DealsComponent,
     IntroComponent,
-    HomeComponent
+    HomeComponent,
+    ContactComponent,
+    AboutComponent
   ],
   imports: [
     BrowserModule,
