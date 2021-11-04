@@ -13,6 +13,8 @@ import { ContactComponent } from './home/contact/contact.component';
 import { AboutComponent } from './home/about/about.component';
 import { StoreComponent } from './store/store.component';
 import { PackageComponent } from './store/package/package.component';
+import { PackageDetailsComponent } from './store/package-details/package-details.component';
+import { StoreIntroComponent } from './store/store-intro/store-intro.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import { PackageComponent } from './store/package/package.component';
     ContactComponent,
     AboutComponent,
     StoreComponent,
-    PackageComponent
+    PackageComponent,
+    PackageDetailsComponent,
+    StoreIntroComponent
   ],
   imports: [
     BrowserModule,
