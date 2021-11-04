@@ -32,6 +32,11 @@
 		display: block;
 }
 
+.packageButton a
+{
+	text-decoration: none;
+}
+
 .packageButton button:hover{
     background-color: #663399;
 		color: white;
