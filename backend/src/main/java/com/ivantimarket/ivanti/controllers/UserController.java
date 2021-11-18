@@ -30,10 +30,10 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/users")
-    public ResponseEntity<List<UserDTO>> getUsers() {
-        return ResponseEntity.ok().body(userService.getUserDTOs());
-    }
+//    @GetMapping("/users")
+//    public ResponseEntity<List<UserDTO>> getUsers() {
+//        return ResponseEntity.ok().body(userService.getUserDTOs());
+//    }
 
     @PostMapping("/register")
     public ResponseEntity<UserDTO> saveUser(@RequestBody NewUserDTO userDTO) {

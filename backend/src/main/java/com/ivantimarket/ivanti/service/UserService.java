@@ -95,7 +95,9 @@ public class UserService implements  UserDetailsService {
        user.getRoles().add(role);
     }
 
-    public UserDTO getUserDTO(String username) { return userMapper.toUserDto(userRepo.findByUsername(username)); }
+    public UserDTO getUserDTO(String username) {
+        return userMapper.toUserDto(userRepo.findByUsername(username));
+    }
 
     public UserAuthDTO getUserAuthDTO(String username) { return userMapper.toUserAuthDTO(userRepo.findByUsername(username)); }
 
