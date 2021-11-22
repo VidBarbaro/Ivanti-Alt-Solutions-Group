@@ -1,10 +1,14 @@
 package com.ivantimarket.ivanti.model;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "packages")
 public class Package {
+
+    @Transient
+    public static final String SEQUENCE_NAME = "packages_sequence";
 
     @Id
     private int id;
