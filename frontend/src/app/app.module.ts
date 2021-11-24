@@ -25,6 +25,9 @@ import { AuthenticationService } from './auth/service/authentication.service';
 import { UserService } from './auth/service/user.service';
 import { AuthInterceptor } from './auth/interceptor/auth.interceptor';
 import { NotificationModule } from './notification.module';
+import { ProfilePageComponent } from './profile-page/profile-page.component';
+import { UpdateProfileInfoComponent } from './profile-page/update-profile-info/update-profile-info.component';
+import { ResetPasswordProfileComponent } from './profile-page/reset-password-profile/reset-password-profile.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +43,10 @@ import { NotificationModule } from './notification.module';
     PackageDetailsComponent,
     StoreIntroComponent,
     LoginComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    ProfilePageComponent,
+    UpdateProfileInfoComponent,
+    ResetPasswordProfileComponent
   ],
   imports: [
     BrowserModule,
