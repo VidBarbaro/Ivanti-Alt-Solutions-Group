@@ -15,6 +15,16 @@ import { StoreComponent } from './store/store.component';
 import { PackageComponent } from './store/package/package.component';
 import { PackageDetailsComponent } from './store/package-details/package-details.component';
 import { StoreIntroComponent } from './store/store-intro/store-intro.component';
+import { LoginComponent } from './login/login.component';
+import { RegistrationComponent } from './registration/registration.component';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+import { NotificationService } from './auth/service/notification.service';
+import { AuthenticationGuard } from './auth/guard/authentication.guard';
+import { AuthenticationService } from './auth/service/authentication.service';
+import { UserService } from './auth/service/user.service';
+import { AuthInterceptor } from './auth/interceptor/auth.interceptor';
+import { NotificationModule } from './notification.module';
 
 @NgModule({
   declarations: [
@@ -28,15 +38,20 @@ import { StoreIntroComponent } from './store/store-intro/store-intro.component';
     StoreComponent,
     PackageComponent,
     PackageDetailsComponent,
-    StoreIntroComponent
+    StoreIntroComponent,
+    LoginComponent,
+    RegistrationComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MaterialModule
+    MaterialModule,
+    HttpClientModule, 
+    NotificationModule,
+    FormsModule
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [NotificationService, AuthenticationGuard, AuthenticationService, UserService, { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
+  bootstrap: [AppComponent],
 })
 export class AppModule { }
