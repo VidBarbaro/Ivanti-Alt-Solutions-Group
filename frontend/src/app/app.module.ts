@@ -17,7 +17,7 @@ import { PackageDetailsComponent } from './store/package-details/package-details
 import { StoreIntroComponent } from './store/store-intro/store-intro.component';
 import { LoginComponent } from './login/login.component';
 import { RegistrationComponent } from './registration/registration.component';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { NotificationService } from './auth/service/notification.service';
 import { AuthenticationGuard } from './auth/guard/authentication.guard';
@@ -28,6 +28,8 @@ import { NotificationModule } from './notification.module';
 import { ProfilePageComponent } from './profile-page/profile-page.component';
 import { UpdateProfileInfoComponent } from './profile-page/update-profile-info/update-profile-info.component';
 import { ResetPasswordProfileComponent } from './profile-page/reset-password-profile/reset-password-profile.component';
+import { FooterComponent } from './footer/footer.component';
+
 
 @NgModule({
   declarations: [
@@ -46,7 +48,8 @@ import { ResetPasswordProfileComponent } from './profile-page/reset-password-pro
     RegistrationComponent,
     ProfilePageComponent,
     UpdateProfileInfoComponent,
-    ResetPasswordProfileComponent
+    ResetPasswordProfileComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
@@ -55,9 +58,10 @@ import { ResetPasswordProfileComponent } from './profile-page/reset-password-pro
     MaterialModule,
     HttpClientModule, 
     NotificationModule,
-    FormsModule
+    FormsModule,
   ],
   providers: [NotificationService, AuthenticationGuard, AuthenticationService, UserService, { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
   bootstrap: [AppComponent],
 })
+
 export class AppModule { }
