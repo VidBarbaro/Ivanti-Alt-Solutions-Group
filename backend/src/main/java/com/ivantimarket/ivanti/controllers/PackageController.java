@@ -1,5 +1,6 @@
 package com.ivantimarket.ivanti.controllers;
 
+import com.ivantimarket.ivanti.dto.packages.NewPackageDTO;
 import com.ivantimarket.ivanti.model.Package;
 import com.ivantimarket.ivanti.service.PackageService;
 import com.ivantimarket.ivanti.service.SequenceGeneratorService;
@@ -34,9 +35,9 @@ public class PackageController {
         return packageService.getPackage(packageId);
     }
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public Package addNewPackage(@RequestBody Package newPackage) {
+    public Package addNewPackage(@RequestBody NewPackageDTO newPackage) {
         LOG.info("Saving package.");
-        newPackage.setId((int) sequenceGeneratorService.generateSequence(Package.SEQUENCE_NAME));
+        newPackage.setId(sequenceGeneratorService.generateSequence(Package.SEQUENCE_NAME));
         return packageService.addNewPackage(newPackage);
     }
     @RequestMapping(value = "/delete/{packageId}", method = RequestMethod.DELETE)

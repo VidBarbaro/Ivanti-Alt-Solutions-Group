@@ -1,8 +1,8 @@
 package com.ivantimarket.ivanti.dto._mapper;
 
-import com.ivantimarket.ivanti.dto.UserAuthDTO;
-import com.ivantimarket.ivanti.dto.NewUserDTO;
-import com.ivantimarket.ivanti.dto.UserDTO;
+import com.ivantimarket.ivanti.dto.user.UserAuthDTO;
+import com.ivantimarket.ivanti.dto.user.NewUserDTO;
+import com.ivantimarket.ivanti.dto.user.UserDTO;
 import com.ivantimarket.ivanti.model.User;
 import org.mapstruct.Mapper;
 
@@ -14,6 +14,6 @@ public interface UserMapper {
     User toUser(NewUserDTO user);
     User toUserDTO(UserDTO user);
     List<UserDTO> toUserDTOs(List<User> users);
-   // User fakeDTO(UserDTO user);
     UserAuthDTO toUserAuthDTO(User user);
+    // User fakeMethod(UserDTO user);
 }

@@ -1,14 +1,10 @@
 package com.ivantimarket.ivanti.controllers;
 
-import com.ivantimarket.ivanti.dto.NewUserDTO;
-import com.ivantimarket.ivanti.dto.UserDTO;
+import com.ivantimarket.ivanti.dto.user.NewUserDTO;
+import com.ivantimarket.ivanti.dto.user.UserDTO;
 import com.ivantimarket.ivanti.model.User;
-import com.ivantimarket.ivanti.repo.UserRepository;
 import com.ivantimarket.ivanti.service.SequenceGeneratorService;
 import com.ivantimarket.ivanti.service.UserService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -16,9 +12,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.SequenceInputStream;
 import java.net.URI;
-import java.util.List;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController

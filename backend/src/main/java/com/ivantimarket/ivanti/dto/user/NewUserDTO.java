@@ -1,4 +1,4 @@
-package com.ivantimarket.ivanti.dto;
+package com.ivantimarket.ivanti.dto.user;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
