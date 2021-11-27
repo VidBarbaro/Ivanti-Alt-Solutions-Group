@@ -1,7 +1,7 @@
 package com.ivantimarket.ivanti.service;
 
 import com.ivantimarket.ivanti.dto._mapper.PackageMapper;
-import com.ivantimarket.ivanti.dto._mapper.UserMapper;
+//import com.ivantimarket.ivanti.dto._mapper.UserMapper;
 import com.ivantimarket.ivanti.dto.packages.NewPackageDTO;
 import com.ivantimarket.ivanti.model.Package;
 import com.ivantimarket.ivanti.model.User;
@@ -22,7 +22,7 @@ public class PackageService {
     private final PackageRepository packageRepository;
     private final PackageMapper packageMapper;
     private final UserRepository userService;
-    private final UserMapper userMapper;
+//    private final UserMapper userMapper;
     public List<Package> getAllPackages() {
         return packageRepository.findAll();
     }
@@ -35,10 +35,11 @@ public class PackageService {
 
         User user = userService.findById(newPackageDTO.getCreator().getId());
         user.getDownloaded_packages_id().add(newPackageDTO.getId());
+        log.info("new package: "+ newPackageDTO.toString());
         userService.save(user);
         Package newPackage = packageMapper.toPackage(newPackageDTO);
         newPackage.getVersions().add(newPackageDTO.getVersion());
-        log.info("Id: {}, Title: {}",String.valueOf(newPackage.getId()), newPackage.getTitle());
+        log.info("Id: {}, Title: {}, Creator: {}",String.valueOf(newPackage.getId()), newPackage.getTitle(), newPackage.getCreator());
         return packageRepository.save(newPackage);
     }
 

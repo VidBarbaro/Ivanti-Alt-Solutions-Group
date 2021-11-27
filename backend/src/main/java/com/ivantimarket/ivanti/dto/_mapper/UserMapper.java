@@ -13,7 +13,7 @@ public interface UserMapper {
     UserDTO toUserDto(User user);
     User toUser(NewUserDTO user);
     User toUserDTO(UserDTO user);
-    List<UserDTO> toUserDTOs(List<User> users);
+//    List<UserDTO> toUserDTOs(List<User> users);
     UserAuthDTO toUserAuthDTO(User user);
     // User fakeMethod(UserDTO user);
 }

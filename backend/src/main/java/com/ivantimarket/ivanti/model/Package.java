@@ -16,7 +16,7 @@ import java.util.List;
 public class Package {
 
     @Transient
-    public static final String SEQUENCE_NAME = "packages_sequence";
+    public static final String SEQUENCE_NAMEE = "packages_sequence";
 
     @Id
     private long id;

@@ -1,6 +1,6 @@
 package com.ivantimarket.ivanti.components;
 
-import com.ivantimarket.ivanti.model.User;
+import com.ivantimarket.ivanti.model.Package;
 import com.ivantimarket.ivanti.service.SequenceGeneratorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.mapping.event.AbstractMongoEventListener;
@@ -8,7 +8,7 @@ import org.springframework.data.mongodb.core.mapping.event.BeforeConvertEvent;
 import org.springframework.stereotype.Component;
 
 @Component
-public class PackageModelListener extends AbstractMongoEventListener<User> {
+public class PackageModelListener extends AbstractMongoEventListener<Package> {
 
     private SequenceGeneratorService sequenceGeneratorService;
 
@@ -18,9 +18,9 @@ public class PackageModelListener extends AbstractMongoEventListener<User> {
     }
 
     @Override
-    public void onBeforeConvert(BeforeConvertEvent<User> event) {
+    public void onBeforeConvert(BeforeConvertEvent<Package> event) {
         if (event.getSource().getId() < 1) {
-            event.getSource().setId(sequenceGeneratorService.generateSequence(User.SEQUENCE_NAME));
+            event.getSource().setId(sequenceGeneratorService.generateSequence(Package.SEQUENCE_NAMEE));
         }
     }
 
