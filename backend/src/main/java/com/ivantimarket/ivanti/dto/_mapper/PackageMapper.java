@@ -8,7 +8,8 @@ import org.mapstruct.Mapper;
 public interface PackageMapper {
 
     Package toPackage(NewPackageDTO packageDTO);
-    //one of these functions has to be commented or uncommented every time
     NewPackageDTO toPackageDTO(Package p);
-//    Package fakeMethod(NewPackageDTO fake);
+
+    //This function has to be commented or uncommented before running the app for the 1st time
+    Package fakeMethod(NewPackageDTO fake);
 }
