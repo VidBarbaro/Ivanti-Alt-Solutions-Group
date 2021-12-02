@@ -1,13 +1,14 @@
-import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
+import { HttpErrorResponse, HttpResponse, HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { NotificationType } from '../auth/enum/notification-type.enum';
 import { AuthenticationService } from '../auth/service/authentication.service';
 import { NotificationService } from '../auth/service/notification.service';
 import { Package } from '../model/package';
 import { User } from '../model/user';
 import { PackageService } from '../_services/package-service/package-service';
+
 
 @Component({
   selector: 'app-store',
@@ -20,24 +21,28 @@ export class StoreComponent implements OnInit {
   public packages: Package[];
 
   constructor(private router: Router, private authenticationService: AuthenticationService,
-    private notificationService: NotificationService, private packageService: PackageService) { }
+    private notificationService: NotificationService, private packageService: PackageService, private http: HttpClient) { }
 
 
   ngOnInit(): void {
-    if (this.authenticationService.isUserLoggedIn()) {
-      this.router.navigateByUrl('/home');    ///user/management
-    } else {
-      this.router.navigateByUrl('/login');
-    }
-
+    // if (this.authenticationService.isUserLoggedIn()) {
+    //   this.router.navigateByUrl('/home');    ///user/management
+    // } else {
+    //   this.router.navigateByUrl('/login');
+    // }
+    this.showPackages();
+    // this.http.get<any>(`http://localhost:8080/api/packages`).subscribe(data => {
+    //   this.packages = data.total;
+    // })
   }
 
-  public showPackages(user: User): void {
+  public showPackages(): void {
     this.showLoading = true;
     this.subscriptions.push(
       this.packageService.getPackages().subscribe( // we get user from the back-end
-        (response: HttpResponse<Package[]>) => {
-          this.packages = response.body;
+        (response: Package[]) => {
+          this.packages = response;
+          console.log(response);
           this.showLoading = false; // stop showing loading on button
         },
         (errorResponse: HttpErrorResponse) => {

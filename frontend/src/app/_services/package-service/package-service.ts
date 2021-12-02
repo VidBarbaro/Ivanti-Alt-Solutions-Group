@@ -13,8 +13,8 @@ export class PackageService {
 
     constructor(private http: HttpClient) { }
 
-    public getPackages(): Observable<HttpResponse<Package[]>> {
-        return this.http.get<Package[]>(`${this.host}/api/packages`, { observe: 'response' });
+    public getPackages(): Observable<Package[]> {
+        return this.http.get<Package[]>(`${this.host}/api/packages`);
     }
 
     //   public addPackage(formData: FormData): Observable<Package | HttpErrorResponse> {
