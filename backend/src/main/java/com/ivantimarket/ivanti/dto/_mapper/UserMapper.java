@@ -17,5 +17,5 @@ public interface UserMapper {
     UserAuthDTO toUserAuthDTO(User user);
 
     //This function has to be commented or uncommented before running the app for the 1st time
-     User fakeMethod(UserDTO user);
+//     User fakeMethod(UserDTO user);
 }

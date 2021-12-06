@@ -6,6 +6,8 @@ import com.ivantimarket.ivanti.model.User;
 import com.ivantimarket.ivanti.service.SequenceGeneratorService;
 import com.ivantimarket.ivanti.service.UserService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -16,7 +18,7 @@ import java.net.URI;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@RequestMapping(value="/api")
+@RequestMapping(value = "/api")
 public class UserController {
 
     private final UserService userService;
@@ -29,10 +31,43 @@ public class UserController {
         this.sequenceGeneratorService = sequenceGeneratorService;
     }
 
-//    @GetMapping("/users")
+    //    @GetMapping("/users")
 //    public ResponseEntity<List<UserDTO>> getUsers() {
 //        return ResponseEntity.ok().body(userService.getUserDTOs());
 //    }
+    //personally dont think that this is the way because we do not check whether the user is the same as the one who
+    //is updating this user
+    @PostMapping("/user/update/password")
+    public ResponseEntity<User> updatePasswordUser(HttpServletRequest request, HttpServletResponse response,
+                                           @RequestParam("id") long id,
+                                           @RequestParam("oldpassword") String oldpassword,
+                                           @RequestParam("password") String password) throws IOException {
+        User user = userService.getUserByToken(request, response);
+        if (userService.getUser(id).getId() == user.getId()) {
+            User u = userService.updatePasswordUser(id,oldpassword, password);
+            if (u != null) {
+                return ResponseEntity.ok(u);
+            }
+        }
+        return ResponseEntity.badRequest().body(null);
+
+    }
+
+    @PostMapping("/user/update")
+    public ResponseEntity<User> updateUser(HttpServletRequest request, HttpServletResponse response,
+                                           @RequestParam("id") long id,
+                                           @RequestParam("name") String name,
+                                           @RequestParam("email") String email) throws IOException {
+        User user = userService.getUserByToken(request, response);
+        if (userService.getUser(id).getId() == user.getId()) {
+            User u = userService.updateUser(name, email, id);
+            if (u != null) {
+                return ResponseEntity.ok(u);
+            }
+        }
+        return ResponseEntity.badRequest().body(null);
+
+    }
 
     @PostMapping("/register")
     public ResponseEntity<UserDTO> saveUser(@RequestBody NewUserDTO userDTO) {
@@ -43,6 +78,6 @@ public class UserController {
 
     @GetMapping("/token/refresh")
     public void refreshToken(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        userService.refreshToken(request,response);
+        userService.refreshToken(request, response);
     }
 }
