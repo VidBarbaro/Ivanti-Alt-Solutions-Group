@@ -1,50 +1,27 @@
 package com.ivantimarket.ivanti.model;
 
+import com.ivantimarket.ivanti.dto.user.UserDTO;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Document(collection = "packages")
+@Getter
+@Setter
 public class Package {
 
+    @Transient
+    public static final String SEQUENCE_NAMEE = "packages_sequence";
+
     @Id
-    private int id;
+    private long id;
     private String title;
-    private User creator;
-
-    public Package(int id, String title, User creator) {
-        this.id = id;
-        this.title = title;
-        this.creator = creator;
-    }
-    public Package(String title, User creator) {
-        this.title = title;
-        this.creator = creator;
-    }
-    public Package() {
-
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public User getCreator() {
-        return creator;
-    }
-
-    public void setCreator(User creator) {
-        this.creator = creator;
-    }
+    private UserDTO creator;
+    private String intro;
+    private List<Version> versions = new ArrayList<>();
 }

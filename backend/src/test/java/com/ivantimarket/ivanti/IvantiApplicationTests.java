@@ -36,19 +36,4 @@ class IvantiApplicationTests {
 
 	}
 
-
-
-	@Test
-	public void testSaveUser() {
-		User user = new User(10,"Testing Testing","testUsername","test1234","test@ivanti.nl");
-		userRepository.save(user);
-		Assert.assertEquals(user, userRepository.save(user));
-	}
-	@Test
-	public void testUserIsSavedCorrectly() {
-		List<User> users = userRepository.findAll();
-		Assert.assertEquals("test@ivanti.nl",users.get(0).getEmail());
-	}
-
-
 }
