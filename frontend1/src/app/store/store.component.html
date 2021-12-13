@@ -25,7 +25,7 @@
 
 <div class="packagesContainer">
     <table *ngFor="let package of packages">
-        <app-package [title] = "package.title"></app-package>
+        <app-package [id] = "package.id" [title]="package.title" [intro]="package.intro"></app-package>
     </table>
     <!-- <app-package ></app-package>
     <app-package></app-package>

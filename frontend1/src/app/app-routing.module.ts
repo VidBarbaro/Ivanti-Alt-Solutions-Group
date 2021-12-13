@@ -22,8 +22,11 @@ const routes: Routes = [
         path: '', component: StoreComponent
       },
       {
-        path: 'package-details', component: PackageDetailsComponent
-      },]
+        path: 'package',
+        children: [
+          { path: 'details/:id', component: PackageDetailsComponent }
+        ]
+      }]
   },
   {
     path : 'profile-page',
