@@ -18,14 +18,14 @@ export class UpdateProfileInfoComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  public updateProfile(email: string, name: string): void {
-   console.log("intra aici");
+  // public updateProfile(email: string, name: string): void {
+  //  console.log("intra aici");
    
-  }
+  // }
 
-  valuechange(newValue : String) {
-    mymodel = newValue;
-    console.log(newValue)
-  }
+  // valuechange(newValue : String) {
+  //   mymodel = newValue;
+  //   console.log(newValue)
+  // }
 
 }

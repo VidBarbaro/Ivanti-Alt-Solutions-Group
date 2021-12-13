@@ -29,10 +29,10 @@ export class StoreComponent implements OnInit {
     // } else {
     //   this.router.navigateByUrl('/login');
     // }
-
+    this.showPackages();
   }
 
-  public showPackages(user: User): void {
+  public showPackages(): void {
     this.showLoading = true;
     this.subscriptions.push(
       this.packageService.getPackages().subscribe( // we get user from the back-end

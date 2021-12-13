@@ -10,7 +10,7 @@
             <div class="info_data">
                 <div class="data">
                     <h4>Email</h4>
-                    <input [ngModel]="mymodel" (ngModelChange)="valuechange($event)" type="text" value={{loggedInUser.email}}>
+                    <input type="text" value={{loggedInUser.email}}>
                 </div>
                 <div class="data">
                     <h4>Full Name</h4>
@@ -26,7 +26,7 @@
 
         <div class="social_media">
             <ul>
-                <!-- <button (click)="updateProfile(newEmailInput.value, newNameInput.value)" type="submit" mat-raised-button target="_blank">Update Profile</button> -->
+                <button type="submit" mat-raised-button target="_blank">Update Profile</button>
                 <!-- <a mat-raised-button href="" target="_blank">Update Profile</a> -->
             </ul>
         </div>

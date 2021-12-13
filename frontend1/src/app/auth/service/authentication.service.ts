@@ -39,7 +39,6 @@ export class AuthenticationService {
     this.addBodyToLocalCache(body);
     localStorage.setItem('username', username);
     return this.http.post<HttpResponse<any>>(`${this.host}/api/login`, body, { observe: 'response' });
-
   }
 
   public register(name: string, username: string, password: string, email: string): Observable<User> {

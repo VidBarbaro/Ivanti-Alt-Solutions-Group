@@ -24,6 +24,10 @@
 </div>
 
 <div class="packagesContainer">
+    <table *ngFor="let package of packages">
+        <app-package [title] = "package.title"></app-package>
+    </table>
+    <!-- <app-package ></app-package>
     <app-package></app-package>
     <app-package></app-package>
     <app-package></app-package>
@@ -31,8 +35,7 @@
     <app-package></app-package>
     <app-package></app-package>
     <app-package></app-package>
-    <app-package></app-package>
-    <app-package></app-package>
+    <app-package></app-package> -->
 
 
 
