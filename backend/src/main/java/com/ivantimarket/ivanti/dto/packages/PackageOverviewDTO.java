@@ -1,18 +1,17 @@
 package com.ivantimarket.ivanti.dto.packages;
 
 import com.ivantimarket.ivanti.dto.user.UserDTO;
+import com.ivantimarket.ivanti.model.SystemRequirements;
 import com.ivantimarket.ivanti.model.Version;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
-public class NewPackageDTO {
+public class PackageOverviewDTO {
 
     private long id;
     private String title;
-    private long creatorId;
+    private UserDTO creator;
     private String intro;
+    private SystemRequirements systemRequirements;
+    private Version latestVersion;
 }

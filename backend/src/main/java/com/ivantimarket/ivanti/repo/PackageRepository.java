@@ -9,8 +9,7 @@ import java.util.Optional;
 @Repository
 public interface PackageRepository extends MongoRepository<Package,Integer> {
 
-    Package findById(int id);
-
+    Package findById(long id);
     Optional<Package> findByTitle(String title);
 
     Boolean existsByTitle(String title);
