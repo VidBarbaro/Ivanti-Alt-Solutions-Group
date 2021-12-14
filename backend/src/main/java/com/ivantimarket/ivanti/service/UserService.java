@@ -70,6 +70,10 @@ public class UserService implements UserDetailsService {
         return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), authorities);
     }
 
+    public UserDTO getUserDTO(long id){
+        return userMapper.toUserDto(userRepo.findById(id));
+    }
+
     public UserDTO saveUser(NewUserDTO userDTO) {
         User existingUsername = userRepo.findByUsername(userDTO.getUsername());
         User existingEmail = userRepo.findByEmail(userDTO.getEmail());

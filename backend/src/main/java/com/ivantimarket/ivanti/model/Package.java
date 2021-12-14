@@ -23,5 +23,6 @@ public class Package {
     private String title;
     private UserDTO creator;
     private String intro;
+    private SystemRequirements systemRequirements;
     private List<Version> versions = new ArrayList<>();
 }
