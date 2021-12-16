@@ -28,22 +28,24 @@ jobs:
       # Runs a single command using the runners shell
       - name: Run a one-line script
         run: echo Hello, world!
-#         setup java jdk
-      - name: Set up JDK
-        uses: actions/setup-java@v1
-        with:
-          java-version: 1.8
+
       # Runs a set of commands using the runners shell
       - name: Run a multi-line script
         run: |
           echo Add other actions to build,
           echo test, and deploy your project.
 
+#         setup java jdk
+      - name: Set up JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+
 #       - name: Grant permission for gradlew
 #         run: chmod +x gradlew
 #         build the project
-      - name: Build with Gradle
-        run: |
-          cd backend
-          gradle build
-          echo "Building project has successfully finished"
+#       - name: Build with Gradle
+#         run: |
+#           cd backend
+#           gradle build
+#           echo "Building project has successfully finished"
