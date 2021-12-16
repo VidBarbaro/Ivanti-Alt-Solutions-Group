@@ -36,7 +36,7 @@ jobs:
           echo test, and deploy your project.
 
       - name: Grant permission for gradlew
-        run: chmod +x gradlew
+        run: chmod +x ./gradlew
 #         build the project
       - name: Build with Gradle
         run: |
