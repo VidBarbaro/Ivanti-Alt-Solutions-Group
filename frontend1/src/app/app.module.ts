@@ -30,6 +30,8 @@ import { ProfilePageComponent } from './profile-page/profile-page.component';
 import { UpdateProfileInfoComponent } from './profile-page/update-profile-info/update-profile-info.component';
 import { ResetPasswordProfileComponent } from './profile-page/reset-password-profile/reset-password-profile.component';
 import { FooterComponent } from './footer/footer.component';
+import { ManageYourPackagesComponent } from './manage-your-packages/manage-your-packages.component';
+import { AddPackageComponent } from './manage-your-packages/add-package/add-package.component';
 
 
 @NgModule({
@@ -50,7 +52,9 @@ import { FooterComponent } from './footer/footer.component';
     ProfilePageComponent,
     UpdateProfileInfoComponent,
     ResetPasswordProfileComponent,
-    FooterComponent
+    FooterComponent,
+    ManageYourPackagesComponent,
+    AddPackageComponent
   ],
   imports: [
     BrowserModule,

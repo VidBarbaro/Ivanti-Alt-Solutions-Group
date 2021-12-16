@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
+import { AddPackageComponent } from './manage-your-packages/add-package/add-package.component';
+import { ManageYourPackagesComponent } from './manage-your-packages/manage-your-packages.component';
 import { ProfilePageComponent } from './profile-page/profile-page.component';
 import { ResetPasswordProfileComponent } from './profile-page/reset-password-profile/reset-password-profile.component';
 import { UpdateProfileInfoComponent } from './profile-page/update-profile-info/update-profile-info.component';
@@ -41,6 +43,16 @@ const routes: Routes = [
         path: 'reset-password', component: ResetPasswordProfileComponent
       },]
   },
+  {
+    path: 'manage-packages',
+    children: [
+      {
+        path: '', component: ManageYourPackagesComponent
+      },
+      {
+        path: 'add-package', component: AddPackageComponent
+      },]
+  }
 ];
 
 @NgModule({

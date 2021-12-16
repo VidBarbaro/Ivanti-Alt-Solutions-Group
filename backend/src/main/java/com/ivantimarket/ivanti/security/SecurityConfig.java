@@ -37,7 +37,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.cors();
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         //package saving-creating/deleting/updating has to be restricted later on
-        http.authorizeRequests().antMatchers("/api/login/**","/api/register/**", "/api/token/refresh/**", "/api/users/**", "/api/packages/get/**", "/api/packages/","/api/packages/download**","/user/login/**").permitAll();
+        http.authorizeRequests().antMatchers("/api/login/**","/api/register/**", "/api/token/refresh/**", "/api/users/**", "/api/packages/get/**", "/api/packages/","/api/packages/download**","/user/login/**", "/api/user/update", "/api/user/update/password").permitAll();
 
         http.authorizeRequests().antMatchers(GET, "/api/user/**").hasAnyAuthority("ROLE_USER");
         http.authorizeRequests().antMatchers(POST, "/api/user/update","/api/user/update/password").hasAnyAuthority("ROLE_CUSTOMER");

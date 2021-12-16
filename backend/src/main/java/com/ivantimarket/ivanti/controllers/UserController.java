@@ -42,7 +42,7 @@ public class UserController {
                                            @RequestParam("id") long id,
                                            @RequestParam("oldpassword") String oldpassword,
                                            @RequestParam("password") String password) throws IOException {
-        User user = userService.getUserByToken(request, response);
+        User user = userService.getUser(id);
         if (userService.getUser(id).getId() == user.getId()) {
             User u = userService.updatePasswordUser(id,oldpassword, password);
             if (u != null) {
@@ -58,7 +58,7 @@ public class UserController {
                                            @RequestParam("id") long id,
                                            @RequestParam("name") String name,
                                            @RequestParam("email") String email) throws IOException {
-        User user = userService.getUserByToken(request, response);
+        User user = userService.getUser(id);
         if (userService.getUser(id).getId() == user.getId()) {
             User u = userService.updateUser(name, email, id);
             if (u != null) {
