@@ -25,6 +25,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -65,23 +67,61 @@ public class PackageController {
         return packageService.getPackage(packageId);
     }
 
-    @RequestMapping(value = "/create", method = RequestMethod.POST, consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE})
-    public Package addNewPackage(@RequestPart String rawPackage,@RequestPart String rawVersion, @RequestPart MultipartFile file, @RequestPart String rawRequirements) {
-        NewPackageDTO newPackage = getNewPackageDTO(rawPackage);
-        Version version = getVersion(rawVersion);
-        SystemRequirements requirements = getSystemRequirements(rawRequirements);
+//    @RequestMapping(value = "/create", method = RequestMethod.POST, consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE})
+//    public Package addNewPackage(@RequestPart String rawPackage,@RequestPart String rawVersion, @RequestPart MultipartFile file, @RequestPart String rawRequirements) {
+//        NewPackageDTO newPackage = getNewPackageDTO(rawPackage);
+//        Version version = getVersion(rawVersion);
+//        SystemRequirements requirements = getSystemRequirements(rawRequirements);
+//
+//        newPackage.setId(sequenceGeneratorService.generateSequence(Package.SEQUENCE_NAMEE));
+//
+//        String fileName = newPackage.getTitle() + "-" + version.getName() + ".zip";
+//        FileData fileData =pathToFileData(fileService.save(file, fileName));
+//        String url = fileData.getUrl();
+//        version.setUrl(url);
+//        version.setDateAdded(LocalDateTime.now());
+//        version.setSize(fileData.getSize());
+//
+//        return packageService.addNewPackage(newPackage, version, requirements);
+//    }
 
-        newPackage.setId(sequenceGeneratorService.generateSequence(Package.SEQUENCE_NAMEE));
+    @RequestMapping(value = "/create", method = RequestMethod.POST)
+    public Package addNewPackage(@RequestBody NewPackageDTO rawPackage,@RequestBody Version rawVersion, @RequestBody SystemRequirements rawRequirements) {
+        rawPackage.setId(sequenceGeneratorService.generateSequence(Package.SEQUENCE_NAMEE));
+        String fileName = rawPackage.getTitle() + "-" + rawVersion.getName() + ".zip";
+//        FileData fileData = pathToFileData(fileService.save(file, fileName));
+//        String url = fileData.getUrl();
+//        rawVersion.setUrl(url);
+        rawVersion.setDateAdded(LocalDateTime.now());
+//        rawVersion.setSize(fileData.getSize());
 
-        String fileName = newPackage.getTitle() + "-" + version.getName() + ".zip";
-        FileData fileData =pathToFileData(fileService.save(file, fileName));
-        String url = fileData.getUrl();
-        version.setUrl(url);
-        version.setDateAdded(LocalDateTime.now());
-        version.setSize(fileData.getSize());
-
-        return packageService.addNewPackage(newPackage, version, requirements);
+        return packageService.addNewPackage(rawPackage, rawVersion, rawRequirements);
     }
+
+//    @PostMapping(value = "/create")
+//    public ResponseEntity<Package> createPackage(HttpServletRequest request, HttpServletResponse response,
+//                                                 @RequestParam("creatorId") long creatorId,
+//                                                 @RequestParam("packageName") String packageName,
+//                                                 @RequestParam("intro") String intro,
+//                                                 @RequestParam("versionName") String versionName,
+//                                                 @RequestParam
+//                                                 )
+
+//    public ResponseEntity<User> updateUser(HttpServletRequest request, HttpServletResponse response,
+//                                           @RequestParam("id") long id,
+//                                           @RequestParam("name") String name,
+//                                           @RequestParam("email") String email) throws IOException {
+//        User user = userService.getUser(id);
+//        if (userService.getUser(id).getId() == user.getId()) {
+//            User u = userService.updateUser(name, email, id);
+//            if (u != null) {
+//                return ResponseEntity.ok(u);
+//            }
+//        }
+//        return ResponseEntity.badRequest().body(null);
+//
+//    }
+
 
     @PostMapping(value = "/add-version/{packageId}", consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE})
     public Package addVersion(@PathVariable long packageId, @RequestPart String versionString, @RequestPart MultipartFile file){

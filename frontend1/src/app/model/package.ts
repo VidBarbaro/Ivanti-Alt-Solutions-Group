@@ -6,9 +6,9 @@ export class Package {
     public creator: Creator;
     public intro: string;
 
-    constructor() {
-        this.title = '';
-        this.creator = new Creator('');
-        this.intro = '';
+    constructor(title: string, creator: Creator, intro: string) {
+        this.title = title;
+        this.creator = creator;
+        this.intro = intro;
     }
 }

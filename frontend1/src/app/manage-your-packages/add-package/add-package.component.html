@@ -1,5 +1,5 @@
 <div class="testbox">
-    <form action="/">
+    <form #createNewPackage="ngForm" (ngSubmit)="onAddNewPackage(createNewPackage)">
         <div class="banner">
             <h1>Add New Package</h1>
         </div>
@@ -7,7 +7,7 @@
         <div class="item">
             <label for="name">Name of the package<span>*</span></label>
             <div class="item">
-                <input id="name" type="text" name="name" placeholder="Please enter the name of the package" required />
+                <input type="text" name="packageName" placeholder="Please enter the name of the package" required />
             </div>
         </div>
         <!-- <div class="item">
@@ -19,7 +19,7 @@
         <div class="item">
             <label for="name">Intro Text<span>*</span></label>
             <div class="item">
-                <input id="name" type="text" name="name" placeholder="Please enter the intro text of the package"
+                <input type="text" name="intro" placeholder="Please enter the intro text of the package"
                     required />
             </div>
         </div>
@@ -27,42 +27,49 @@
         <div class="item">
             <label for="name">Name<span>*</span></label>
             <div class="item">
-                <input id="name" type="text" name="name" placeholder="Please the name of the version" />
+                <input type="text" name="versionName" placeholder="Please the name of the version" />
             </div>
         </div>
         <div class="item">
             <label for="bdate">README Content<span>*</span></label>
             <div class="item">
-                <input id="name" type="text" name="name" placeholder="Please the README content" />
+                <input type="text" name="readme" placeholder="Please the README content" />
             </div>
         </div>
         <div class="item">
-            <label for="name">Download Link<span>*</span></label>
+            <label for="name">Package Url<span>*</span></label>
             <div class="item">
-                <input id="name" type="text" name="name" placeholder="Please the download link for the package" />
+                <input type="text" name="packageUrl" placeholder="Please the download link for the package" />
             </div>
         </div>
+        <!-- <div class="item">
+            <label for="name">File<span>*</span></label>
+            <div class="item">
+                <input type="file" accept="*" name="file" 
+                (change)="onFileChange($any($event).target.files[0])">
+            </div>
+        </div> -->
         <h2>System requirements</h2>
         <div class="item">
             <label for="name">Processor Type<span>*</span></label>
             <div class="item">
-                <input id="name" type="text" name="name" placeholder="Please enter the processor type" />
+                <input type="text" name="processorType" placeholder="Please enter the processor type" />
             </div>
         </div>
         <div class="item">
             <label for="name">RAM<span>*</span></label>
             <div class="item">
-                <input id="name" type="text" name="name" placeholder="Please enter the RAM" />
+                <input type="text" name="ram" placeholder="Please enter the RAM" />
             </div>
         </div>
         <div class="item">
             <label for="name">Graphics Card<span>*</span></label>
             <div class="item">
-                <input id="name" type="text" name="name" placeholder="Please enter the graphics card" />
+                <input type="text" name="graphicsCard" placeholder="Please enter the graphics card" />
             </div>
         </div>
         <div class="btn-block">
-            <button type="submit" href="/">Add The Package</button>
+            <button type="submit">Add The Package</button>
         </div>
     </form>
 </div>

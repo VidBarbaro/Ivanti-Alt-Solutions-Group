@@ -24,7 +24,7 @@ export class PackageDetailsComponent implements OnInit {
   public getPackage(): void {
     this.packageService.getPackageById(this.router.snapshot.params.id).subscribe(
       (response: Package) => {
-        this.package = response;
+        this.package = response;        
       }
     )
   }
