@@ -39,11 +39,11 @@ jobs:
           echo Add other actions to build,
           echo test, and deploy your project.
 
-      - name: Grant permission for gradlew
-        run: chmod +x gradlew
+#       - name: Grant permission for gradlew
+#         run: chmod +x gradlew
 #         build the project
       - name: Build with Gradle
         run: |
           cd backend
-          ./gradlew build
+          gradle build
           echo "Building project has successfully finished"
