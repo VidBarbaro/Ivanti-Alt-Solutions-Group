@@ -35,6 +35,9 @@ public class User {
     private Set<Long> downloaded_packages_id = new HashSet<>();
     private Set<Long> uploaded_packages_id = new HashSet<>();
 
+    public void addRole(Role role) {
+        roles.add(role);
+    }
     @Override
     public boolean equals(Object o)
     {

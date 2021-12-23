@@ -119,11 +119,20 @@ public class UserService implements UserDetailsService {
         log.info("Saving new role {} to the database", role.getName());
         return roleRepo.save(role);
     }
+    public boolean deleteUser(User user) {
+        log.info("Deleting user {}", user.getName());
+        if (userRepo.findByUsername(user.getUsername())!=null) {
+            userRepo.delete(user);
+            return true;
+        }
+        return false;
+    }
 
-    private void addRoleToUser(User user, String roleName) {
+    public void addRoleToUser(User user, String roleName) {
         log.info("Adding  role {} to user {}", roleName, user.getUsername());
         Role role = roleRepo.findByName(roleName);
-        user.getRoles().add(role);
+        user.addRole(role);
+        userRepo.save(user);
     }
 
     public UserDTO getUserDTO(String username) {
