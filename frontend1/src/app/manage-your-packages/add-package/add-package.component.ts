@@ -21,29 +21,40 @@ export class AddPackageComponent implements OnInit {
   newSystemRequirements: SystemRequirements;
   newVersion: PackageVersion;
   file: File;
+  message: String
 
-  constructor(private authenticationService: AuthenticationService, private packageService: PackageService, private notificationService: NotificationService) { }
+  constructor(private authenticationService: AuthenticationService, private packageService: PackageService, private notificationService: NotificationService) { 
+    this.message = "";
+  }
 
   ngOnInit(): void {
   }
 
-  public onFileChange(file: File): void {
+  public onFileChange(event: any): void {
+    let file = event.srcElement.files;
     this.file = file;
+    event = null;
   }
 
   public onAddNewPackage(packageForm: NgForm): void {
     this.newPackage = new Package(packageForm.value.name, this.authenticationService.getUserFromLocalCache(), packageForm.value.intro);
     this.newSystemRequirements = new SystemRequirements(packageForm.value.processorType, packageForm.value.ram, packageForm.value.graphicsCard);
-    this.newVersion = new PackageVersion(packageForm.value.versionName, packageForm.value.readme, packageForm.value.packageUrl);
+    this.newVersion = new PackageVersion(packageForm.value.versionName, packageForm.value.readme);
+    // const formData = this.packageService.createNewPackage(this.newPackage, this.newSystemRequirements, this.newVersion, file);
+    console.log(packageForm.value.file);
+    console.log(packageForm.value.intro);
 
-    const formData = this.packageService.createPackageFormData(this.newPackage, this.newSystemRequirements, this.newVersion);
-    this.packageService.addPackage(formData).subscribe(
+    const formdata = this.packageService.createNewPackageFormData(packageForm.value, packageForm.value, packageForm.value, this.file);
+    
+    
+    this.packageService.createNewPackage(formdata).subscribe(
       (response: Package) => {
         packageForm.reset();
         this.sendNotification(NotificationType.SUCCESS, `Package added succesfully`);
       },
       (errorResponse: HttpErrorResponse) => {
         this.sendNotification(NotificationType.ERROR, errorResponse.error);
+        this.message = errorResponse.error;
       }
     )
   }

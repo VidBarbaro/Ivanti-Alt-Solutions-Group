@@ -1,5 +1,5 @@
 <div class="testbox">
-    <form #createNewPackage="ngForm" (ngSubmit)="onAddNewPackage(createNewPackage)">
+    <form #createNewPackage="ngForm" (ngSubmit)="onAddNewPackage(createNewPackage)" enctype="multipart/form-data">
         <div class="banner">
             <h1>Add New Package</h1>
         </div>
@@ -19,8 +19,7 @@
         <div class="item">
             <label for="name">Intro Text<span>*</span></label>
             <div class="item">
-                <input type="text" name="intro" placeholder="Please enter the intro text of the package"
-                    required />
+                <input type="text" name="intro" placeholder="Please enter the intro text of the package" required />
             </div>
         </div>
         <h2>Version Details</h2>
@@ -36,19 +35,18 @@
                 <input type="text" name="readme" placeholder="Please the README content" />
             </div>
         </div>
-        <div class="item">
+        <!-- <div class="item">
             <label for="name">Package Url<span>*</span></label>
             <div class="item">
                 <input type="text" name="packageUrl" placeholder="Please the download link for the package" />
             </div>
-        </div>
-        <!-- <div class="item">
+        </div> -->
+        <div class="item">
             <label for="name">File<span>*</span></label>
             <div class="item">
-                <input type="file" accept="*" name="file" 
-                (change)="onFileChange($any($event).target.files[0])">
+                <input type="file" name="file" (change)="onFileChange($event)" onClick="this.value = null">
             </div>
-        </div> -->
+        </div>
         <h2>System requirements</h2>
         <div class="item">
             <label for="name">Processor Type<span>*</span></label>
@@ -71,5 +69,6 @@
         <div class="btn-block">
             <button type="submit">Add The Package</button>
         </div>
+        <p>{{message}}</p>
     </form>
 </div>
