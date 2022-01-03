@@ -33,6 +33,7 @@ public class User {
     private Set<Role> roles = new HashSet<>();
 
     private Set<Long> downloaded_packages_id = new HashSet<>();
+    private Set<Long> favourite_packages_id = new HashSet<>();
     private Set<Long> uploaded_packages_id = new HashSet<>();
 
     public void addRole(Role role) {

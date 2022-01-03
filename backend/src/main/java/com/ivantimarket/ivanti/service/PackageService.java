@@ -51,7 +51,7 @@ public class PackageService {
 
         log.info(newPackageDTO.toString());
         User user = userService.findById(newPackageDTO.getCreatorId());
-        user.getDownloaded_packages_id().add(newPackageDTO.getId());
+        user.getUploaded_packages_id().add(newPackageDTO.getId());
         userService.save(user);
         Package newPackage = packageMapper.toPackage(newPackageDTO);
         newPackage.setCreator(userMapper.toUserDto(user));
@@ -88,6 +88,44 @@ public class PackageService {
 
     public void deletePackage(int id) {
         packageRepository.deleteById(id);
+    }
+
+    public boolean addPackageToDownloadedPackages(long userId, long packageId){
+        User user = userService.findById(userId);
+        Package mPackage = getPackage(packageId);
+        if(user != null && mPackage != null){
+
+            user.getDownloaded_packages_id().add(packageId);
+            return true;
+        }
+        return false;
+    }
+    public boolean removePackageToDownloadedPackages(long userId, long packageId){
+        User user = userService.findById(userId);
+        if(user != null){
+            if(user.getDownloaded_packages_id().remove(packageId)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    public boolean addPackageToFavouritePackages(long userId, long packageId){
+        User user = userService.findById(userId);
+        Package mPackage = getPackage(packageId);
+        if(user != null && !user.getFavourite_packages_id().contains(packageId)){
+            user.getFavourite_packages_id().add(packageId);
+            return true;
+        }
+        return false;
+    }
+    public boolean removePackageToFavouritePackages(long userId, long packageId){
+        User user = userService.findById(userId);
+        if(user != null){
+            if(user.getFavourite_packages_id().remove(packageId)) {
+                return true;
+            }
+        }
+        return false;
     }
 
 }

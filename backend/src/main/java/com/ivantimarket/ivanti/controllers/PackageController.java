@@ -168,7 +168,42 @@ public class PackageController {
 
         return fileData;
     }
-
+    //not added in securityconfig
+    @PostMapping("/favourites/add")
+    public Package addPackageToFavourites(@RequestParam long userId, @RequestParam long packageId)
+    {
+        Package mPackage = packageService.getPackage(packageId);
+        if(mPackage!=null){
+            if(packageService.addPackageToFavouritePackages(userId,packageId)) {
+                return mPackage;
+            }
+        }
+        return null;
+    }
+    //not added in securityconfig
+    @DeleteMapping("/favourites/remove")
+    public boolean removePackageToFavourites(@RequestParam long userId, @RequestParam long packageId)
+    {
+        Package mPackage = packageService.getPackage(packageId);
+        if(mPackage!=null){
+            if(packageService.removePackageToFavouritePackages(userId,packageId)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    //not added in securityconfig
+    @DeleteMapping("/downloaded/remove")
+    public boolean removePackageFromDownloaded(@RequestParam long userId, @RequestParam long packageId)
+    {
+        Package mPackage = packageService.getPackage(packageId);
+        if(mPackage!=null){
+            if(packageService.removePackageToDownloadedPackages(userId,packageId)) {
+                return true;
+            }
+        }
+        return false;
+    }
     @PostMapping("/add-version/{packageId}")
     public Package addVersionToPackage(@PathVariable long packageId, @RequestBody Version newVersion)
     {
@@ -179,6 +214,7 @@ public class PackageController {
     @ResponseBody
     public ResponseEntity<Resource> getFile(@RequestParam String filename) {
         Resource file = fileService.load(filename);
+        //here we may call add to downloaded packages
         return ResponseEntity.ok()
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFilename() + "\"")
                 .body(file);
