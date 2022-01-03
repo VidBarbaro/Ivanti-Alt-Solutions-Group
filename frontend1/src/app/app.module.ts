@@ -32,6 +32,8 @@ import { ResetPasswordProfileComponent } from './profile-page/reset-password-pro
 import { FooterComponent } from './footer/footer.component';
 import { ManageYourPackagesComponent } from './manage-your-packages/manage-your-packages.component';
 import { AddPackageComponent } from './manage-your-packages/add-package/add-package.component';
+import { UploadedPackagesCardComponent } from './manage-your-packages/uploaded-packages-card/uploaded-packages-card.component';
+import { UploadedPackagesComponent } from './manage-your-packages/uploaded-packages/uploaded-packages.component';
 
 
 @NgModule({
@@ -54,7 +56,9 @@ import { AddPackageComponent } from './manage-your-packages/add-package/add-pack
     ResetPasswordProfileComponent,
     FooterComponent,
     ManageYourPackagesComponent,
-    AddPackageComponent
+    AddPackageComponent,
+    UploadedPackagesCardComponent,
+    UploadedPackagesComponent
   ],
   imports: [
     BrowserModule,

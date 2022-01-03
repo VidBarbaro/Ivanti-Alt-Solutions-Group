@@ -8,9 +8,9 @@ import { PackageService } from 'src/app/_services/package-service/package-servic
   styleUrls: ['./package.component.css']
 })
 export class PackageComponent implements OnInit {
-  @Input() public title: string;
+  @Input() public title: String;
   @Input() public id: number;
-  @Input() public intro: string;
+  @Input() public intro: String;
   package: Package;
 
   constructor(private packageService: PackageService) { }

@@ -1,9 +1,9 @@
 export class SystemRequirements {
-    public processorType: string;
-    public ram: string;
-    public graphicsCard: string;
+    public processorType: String;
+    public ram: String;
+    public graphicsCard: String;
 
-    constructor(processorType: string, ram: string, graphicsCard: string) {
+    constructor(processorType: String, ram: String, graphicsCard: String) {
         this.processorType = processorType;
         this.ram = ram;
         this.graphicsCard = graphicsCard;

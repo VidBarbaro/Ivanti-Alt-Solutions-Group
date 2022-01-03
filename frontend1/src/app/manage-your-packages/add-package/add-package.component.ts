@@ -1,56 +1,53 @@
-import { HttpErrorResponse } from '@angular/common/http';
-import { Version } from '@angular/compiler';
-import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
-import { NotificationType } from 'src/app/auth/enum/notification-type.enum';
-import { AuthenticationService } from 'src/app/auth/service/authentication.service';
-import { NotificationService } from 'src/app/auth/service/notification.service';
-import { UserService } from 'src/app/auth/service/user.service';
-import { Package } from 'src/app/model/package';
-import { SystemRequirements } from 'src/app/model/systemRequirements';
-import { PackageVersion } from 'src/app/model/version';
-import { PackageService } from 'src/app/_services/package-service/package-service';
+import { HttpErrorResponse } from "@angular/common/http";
+import { Component, OnInit } from "@angular/core";
+import { NotificationType } from "src/app/auth/enum/notification-type.enum";
+import { NotificationService } from "src/app/auth/service/notification.service";
+import { Package } from "src/app/model/package";
+import { SystemRequirements } from "src/app/model/systemRequirements";
+import { PackageVersion } from "src/app/model/version";
+import { PackageService } from "src/app/_services/package-service/package-service";
 
 @Component({
   selector: 'app-add-package',
   templateUrl: './add-package.component.html',
   styleUrls: ['./add-package.component.css']
 })
+
 export class AddPackageComponent implements OnInit {
   newPackage: Package;
   newSystemRequirements: SystemRequirements;
   newVersion: PackageVersion;
-  file: File;
-  message: String
+  message: string
 
-  constructor(private authenticationService: AuthenticationService, private packageService: PackageService, private notificationService: NotificationService) { 
+  constructor(private packageService: PackageService, private notificationService: NotificationService) {
     this.message = "";
   }
 
   ngOnInit(): void {
   }
 
-  public onFileChange(event: any): void {
-    let file = event.srcElement.files;
-    this.file = file;
-    event = null;
-  }
+  // public onFileChange(event: any): void {
+  //   let file = event.srcElement.files;
+  //   this.file = file;
+  //   event = null;
+  // }
 
-  public onAddNewPackage(packageForm: NgForm): void {
-    this.newPackage = new Package(packageForm.value.name, this.authenticationService.getUserFromLocalCache(), packageForm.value.intro);
-    this.newSystemRequirements = new SystemRequirements(packageForm.value.processorType, packageForm.value.ram, packageForm.value.graphicsCard);
-    this.newVersion = new PackageVersion(packageForm.value.versionName, packageForm.value.readme);
-    // const formData = this.packageService.createNewPackage(this.newPackage, this.newSystemRequirements, this.newVersion, file);
-    console.log(packageForm.value.file);
-    console.log(packageForm.value.intro);
-
-    const formdata = this.packageService.createNewPackageFormData(packageForm.value, packageForm.value, packageForm.value, this.file);
-    
-    
-    this.packageService.createNewPackage(formdata).subscribe(
+  public onAddNewPackage(name: string, intro: string, versionName: string, versionReadMe: string, processorType: string, ram: string, graphicsCard: string): void {
+    this.packageService.createNewPackage(name, intro, versionName, versionReadMe, processorType, ram, graphicsCard).subscribe(
       (response: Package) => {
-        packageForm.reset();
+        this.packageService.addVersionToPackage(response.id, versionName, versionReadMe).subscribe(
+          (resp: Package) => {
+
+            this.sendNotification(NotificationType.SUCCESS, `Version added succesfully`);
+          },
+
+          (errorResponse: HttpErrorResponse) => {
+            this.sendNotification(NotificationType.ERROR, errorResponse.error);
+            this.message = errorResponse.error;
+          }
+        )
         this.sendNotification(NotificationType.SUCCESS, `Package added succesfully`);
+        this.message = "The package was successfully added!"
       },
       (errorResponse: HttpErrorResponse) => {
         this.sendNotification(NotificationType.ERROR, errorResponse.error);
@@ -67,5 +64,4 @@ export class AddPackageComponent implements OnInit {
       this.notificationService.notify(notificationType, "An error has occured.")
     }
   }
-
 }

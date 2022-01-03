@@ -7,25 +7,27 @@
                 </div>
             </div>
             <div class="d-flex justify-content-center form_container">
-                <form #registerForm="ngForm" (ngSubmit)="onRegister(nameInput.value, usernameInput.value, passwordInput.value, emailInput.value)">
+                <form #registerForm="ngForm"
+                    (ngSubmit)="onRegister(nameInput.value, usernameInput.value, passwordInput.value, emailInput.value)">
                     <div class="input-group mb-3">
                         <div class="input-group-append">
                             <span class="input-group-text"><i class="fas fa-user"></i></span>
                         </div>
-                        <input type="text" class="form-control" name="name" placeholder="Name" required
-                            ngModel #nameInput="ngModel">
+                        <input type="text" class="form-control" name="name" placeholder="Name" required ngModel
+                            #nameInput="ngModel">
                     </div>
-                    <span class="help-block" *ngIf="nameInput.invalid && nameInput.touched"
-                        style="color:red;">Please enter a name</span>
-                        <div class="input-group mb-3">
-                            <div class="input-group-append">
-                                <span class="input-group-text"><i class="fas fa-user"></i></span>
-                            </div>
-                            <input type="text" class="form-control" name="password" placeholder="Password" required ngModel
-                                #passwordInput="ngModel">
+                    <span class="help-block" *ngIf="nameInput.invalid && nameInput.touched" style="color:red;">Please
+                        enter a name</span>
+                    <div class="input-group mb-3">
+                        <div class="input-group-append">
+                            <span class="input-group-text"><i class="fas fa-user"></i></span>
                         </div>
-                        <span class="help-block" *ngIf="passwordInput.invalid && passwordInput.touched" style="color:red;">Please enter a
-                            password</span>
+                        <input type="text" class="form-control" name="password" placeholder="Password" required ngModel
+                            #passwordInput="ngModel">
+                    </div>
+                    <span class="help-block" *ngIf="passwordInput.invalid && passwordInput.touched"
+                        style="color:red;">Please enter a
+                        password</span>
                     <div class="input-group mb-3">
                         <div class="input-group-append">
                             <span class="input-group-text"><i class="fas fa-id-card"></i></span>
