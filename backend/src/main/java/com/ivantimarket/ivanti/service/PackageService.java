@@ -68,6 +68,24 @@ public class PackageService {
         return packageRepository.save(pckg);
     }
 
+    public Package addTestPackage(Package newPackage){
+        packageRepository.save(newPackage);
+        return newPackage;
+    }
+
+    public List<Package> getPackagesUploadedByUser(long userId)
+    {
+        List<Package> packages = new ArrayList<>();
+        for(Package p : packageRepository.findAll())
+        {
+            if((p.getCreator().getId()==userId))
+            {
+                packages.add(p);
+            }
+        }
+        return packages;
+    }
+
     public void deletePackage(int id) {
         packageRepository.deleteById(id);
     }

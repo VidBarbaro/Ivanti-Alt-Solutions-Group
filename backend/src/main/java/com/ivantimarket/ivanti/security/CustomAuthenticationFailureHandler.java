@@ -33,7 +33,7 @@ public class CustomAuthenticationFailureHandler
                 "Invalid username or password");
 
         PrintWriter out = response.getWriter();
-        response.setContentType("application/json");
+//        response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         out.print(objectMapper.writeValueAsString(data));
         out.flush();

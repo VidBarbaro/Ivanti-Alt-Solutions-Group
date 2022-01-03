@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.net.URI;
+import java.util.List;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -31,10 +32,10 @@ public class UserController {
         this.sequenceGeneratorService = sequenceGeneratorService;
     }
 
-    //    @GetMapping("/users")
-//    public ResponseEntity<List<UserDTO>> getUsers() {
-//        return ResponseEntity.ok().body(userService.getUserDTOs());
-//    }
+        @GetMapping("/users")
+    public ResponseEntity<List<UserDTO>> getUsers() {
+        return ResponseEntity.ok().body(userService.getUserDTOs());
+    }
     //personally dont think that this is the way because we do not check whether the user is the same as the one who
     //is updating this user
     @PostMapping("/user/update/password")

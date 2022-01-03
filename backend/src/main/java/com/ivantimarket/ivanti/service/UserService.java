@@ -146,8 +146,8 @@ public class UserService implements UserDetailsService {
 
     public List<UserDTO> getUserDTOs() {
         log.info("Fetching all users");
-//        return userMapper.toUserDTOs(userRepo.findAll());
-        return null;
+        return userMapper.toUserDTOs(userRepo.findAll());
+//        return null;
     }
 
     public User getUserByToken(HttpServletRequest request, HttpServletResponse response) throws IOException {

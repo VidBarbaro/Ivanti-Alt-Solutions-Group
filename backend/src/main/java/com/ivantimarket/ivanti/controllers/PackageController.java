@@ -82,21 +82,26 @@ public class PackageController {
 
         return packageService.addNewPackage(newPackage, version, requirements);
     }
-
-    @PostMapping(value = "/add-version/{packageId}", consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE})
-    public Package addVersion(@PathVariable long packageId, @RequestPart String versionString, @RequestPart MultipartFile file){
-
-        Version version = getVersion(versionString);
-
-        String packageName = packageService.getPackage(packageId).getTitle();
-        String fileName = packageName + "-" + version.getName() + ".zip";
-        FileData fileData = pathToFileData(fileService.save(file, fileName));
-        String url = fileData.getUrl();
-        version.setUrl(url);
-        version.setSize(fileData.getSize());
-        version.setDateAdded(LocalDateTime.now());
-        return packageService.addVersion(packageId, version);
+    @PostMapping("/add-new-package")
+    public Package addNewPackage(@RequestBody Package newPackage){
+        return this.packageService.addTestPackage(newPackage);
     }
+
+
+//    @PostMapping(value = "/add-version/{packageId}", consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE})
+//    public Package addVersion(@PathVariable long packageId, @RequestPart String versionString, @RequestPart MultipartFile file){
+//
+//        Version version = getVersion(versionString);
+//
+//        String packageName = packageService.getPackage(packageId).getTitle();
+//        String fileName = packageName + "-" + version.getName() + ".zip";
+//        FileData fileData = pathToFileData(fileService.save(file, fileName));
+//        String url = fileData.getUrl();
+//        version.setUrl(url);
+//        version.setSize(fileData.getSize());
+//        version.setDateAdded(LocalDateTime.now());
+//        return packageService.addVersion(packageId, version);
+//    }
 
     private SystemRequirements getSystemRequirements(String util){
         SystemRequirements utilJson = new SystemRequirements();
@@ -140,6 +145,12 @@ public class PackageController {
         packageService.deletePackage(packageId);
     }
 
+    @GetMapping("/uploaded/{userId}")
+    public List<Package> getUploadedPackagesOfUser(@PathVariable long userId)
+    {
+        return packageService.getPackagesUploadedByUser(userId);
+    }
+
     private FileData pathToFileData(Path path) {
         FileData fileData = new FileData();
         String filename = path.getFileName()
@@ -156,6 +167,12 @@ public class PackageController {
         }
 
         return fileData;
+    }
+
+    @PostMapping("/add-version/{packageId}")
+    public Package addVersionToPackage(@PathVariable long packageId, @RequestBody Version newVersion)
+    {
+        return packageService.addVersion(packageId, newVersion);
     }
 
     @GetMapping("/download")
