@@ -63,7 +63,7 @@ export class AuthenticationService {
     this.loggedInUsername = "";
     localStorage.removeItem('user');
     //localStorage.removeItem('token');
-    localStorage.removeItem('users');
+    // localStorage.removeItem('users');
   }
 
 

@@ -105,4 +105,5 @@ export class PackageService {
     public getUploadedPackagesOfUser(idUser: number) {
         return this.http.get<Package[]>(`${this.host}/api/packages/uploaded/${idUser}`, { observe: 'response' });
     }
+    //TO DO: if the user is a content creator, when he updates the profile info, the creator info should also be updated
 }

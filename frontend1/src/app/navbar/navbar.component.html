@@ -7,6 +7,7 @@
         <a *ngIf="loggedIn" routerLink="/profile-page">Profile Page</a>
         <a *ngIf="loggedIn == false" routerLink="/login">Log In</a>
         <a *ngIf="loggedIn == false" routerLink="/register">Create Account</a>
+        <a *ngIf="loggedIn" routerLink="/" (click)="logOut()">Log Out</a>
     </div>
     <button (click)="toggle()" class="hamburger">
         <img *ngIf="showMenu" src="../../assets/images/hamburger_button.svg" alt="menu" class="menuIcon">

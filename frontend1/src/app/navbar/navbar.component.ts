@@ -8,7 +8,7 @@ import { AuthenticationService } from '../auth/service/authentication.service';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor() {
+  constructor(private authService: AuthenticationService) {
   }
 
   loggedIn: boolean;
@@ -28,6 +28,10 @@ export class NavbarComponent implements OnInit {
   toggle() {
     if (this.showMenu) { this.showMenu = false }
     else { this.showMenu = true }
+  }
+
+  logOut(){
+    this.authService.logOut();
   }
 
 }

@@ -1,0 +1,65 @@
+<div class="testbox">
+    <form #createNewPackage="ngForm"
+        >
+        <div class="banner">
+            <h1>Update Package</h1>
+        </div>
+        <h2>Package Details</h2>
+        <div class="item">
+            <label for="name">Name of the package<span>*</span></label>
+            <div class="item">
+                <input type="text" name="nameInput" placeholder={{currentPackage.title}} #nameInput [(ngModel)]="currentPackage.title"/>
+            </div>
+        </div>
+        <!-- <div class="item">
+            <label for="bdate">Description<span>*</span></label>
+            <div class="name-item">
+                <textarea name="bdate" rows="8" cols="80"></textarea>
+            </div>
+        </div> -->
+        <div class="item">
+            <label for="name">Intro Text<span>*</span></label>
+            <div class="item">
+                <input type="text" name="introInput" placeholder={{currentPackage.intro}}
+                    #introInput [(ngModel)]="currentPackage.intro"/>
+            </div>
+        </div>
+        <h2>Version Details</h2>
+
+        <table>
+            <tr>
+              <th>Version Name</th>
+              <th>Version README</th>
+            </tr>
+               <tr *ngFor="let version of versions">
+                  <th>{{version.name}}</th> 
+                  <th>{{version.name}}</th>
+              </tr>
+          </table>
+
+        <h2>System requirements</h2>
+        <div class="item">
+            <label for="name">Processor Type<span>*</span></label>
+            <div class="item">
+                <input type="text" name="processorTypeInput" placeholder={{currentPackage.systemRequirements.processorType}}
+                    #processorTypeInput [(ngModel)]="currentPackage.systemRequirements.processorType"/>
+            </div>
+        </div>
+        <div class="item">
+            <label for="name">RAM<span>*</span></label>
+            <div class="item">
+                <input type="text" name="ramInput" placeholder={{currentPackage.systemRequirements.ram}} #ramInput [(ngModel)]="currentPackage.systemRequirements.ram"/>
+            </div>
+        </div>
+        <div class="item">
+            <label for="name">Graphics Card<span>*</span></label>
+            <div class="item">
+                <input type="text" name="graphicsCardInput" placeholder={{currentPackage.systemRequirements.graphicsCard}}
+                    #graphicsCardInput [(ngModel)]="currentPackage.systemRequirements.graphicsCard"/>
+            </div>
+        </div>
+        <div class="btn-block">
+            <button type="submit">Update The Package</button>
+        </div>
+    </form>
+</div>

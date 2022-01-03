@@ -34,6 +34,8 @@ import { ManageYourPackagesComponent } from './manage-your-packages/manage-your-
 import { AddPackageComponent } from './manage-your-packages/add-package/add-package.component';
 import { UploadedPackagesCardComponent } from './manage-your-packages/uploaded-packages-card/uploaded-packages-card.component';
 import { UploadedPackagesComponent } from './manage-your-packages/uploaded-packages/uploaded-packages.component';
+import { UploadedPackageDetailsComponent } from './manage-your-packages/uploaded-package-details/uploaded-package-details.component';
+import { UpdatePackageCreatorComponent } from './manage-your-packages/update-package-creator/update-package-creator.component';
 
 
 @NgModule({
@@ -58,7 +60,9 @@ import { UploadedPackagesComponent } from './manage-your-packages/uploaded-packa
     ManageYourPackagesComponent,
     AddPackageComponent,
     UploadedPackagesCardComponent,
-    UploadedPackagesComponent
+    UploadedPackagesComponent,
+    UploadedPackageDetailsComponent,
+    UpdatePackageCreatorComponent
   ],
   imports: [
     BrowserModule,
