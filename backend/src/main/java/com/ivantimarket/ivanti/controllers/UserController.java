@@ -5,6 +5,7 @@ import com.ivantimarket.ivanti.dto.user.UserDTO;
 import com.ivantimarket.ivanti.model.User;
 import com.ivantimarket.ivanti.service.SequenceGeneratorService;
 import com.ivantimarket.ivanti.service.UserService;
+import org.apache.coyote.Response;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -69,7 +70,10 @@ public class UserController {
         return ResponseEntity.badRequest().body(null);
 
     }
-
+    @PostMapping("/user/{userId}/increment-first-time")
+    public ResponseEntity<User> incrementFirstTime(@PathVariable("userId")long userId) {
+        return ResponseEntity.ok().body(userService.incrementFirstTime(userId));
+    }
     @PostMapping("/register")
     public ResponseEntity<UserDTO> saveUser(@RequestBody NewUserDTO userDTO) {
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/user/save").toUriString());
