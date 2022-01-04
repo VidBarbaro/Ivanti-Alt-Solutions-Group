@@ -126,3 +126,22 @@
     flex-wrap: wrap;
     margin-bottom: 70px;
 }
+
+.btn-content-creator
+{
+  background-color: rgba(76,4,139,1);
+  color: #fff;
+}
+
+.btn-content-creator:hover
+{
+  color: #fff;
+  background-color: #4C3F91;
+  width: fit-content;
+}
+
+.success-message
+{
+  padding-top: 15px;
+  color: green;
+}

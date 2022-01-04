@@ -21,6 +21,10 @@
                         <h4>Username</h4>
                         <p>{{loggedInUser.username}}</p>
                     </div>
+                    <div class="data">
+                        <h4>Content Creator Account</h4>
+                        <p>{{contentCreatorToShow}}</p>
+                    </div>
                 </div>
             </div>
 
@@ -42,6 +46,10 @@
                 <ul>
                     <a mat-raised-button routerLink="/profile-page/update-profile">Update Profile</a>
                     <a mat-raised-button routerLink="/profile-page/reset-password">Reset Password</a>
+                    <a *ngIf="isContentCreator == false" mat-raised-button class="btn-content-creator"
+                        (click)="becomeContentCreator()">I want to become a
+                        content creator</a>
+                    <p class="success-message">{{message}}</p>
                 </ul>
             </div>
         </div>

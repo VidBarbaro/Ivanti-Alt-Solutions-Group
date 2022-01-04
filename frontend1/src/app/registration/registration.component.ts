@@ -14,11 +14,14 @@ import { User } from '../model/user';
 })
 export class RegistrationComponent implements OnInit, OnDestroy {
 
-  public showLoading ?: boolean;
+  public showLoading?: boolean;
   private subscriptions: Subscription[] = [];
+  public message: string;
 
   constructor(private router: Router, private authenticationService: AuthenticationService,
-              private notificationService: NotificationService) {}
+    private notificationService: NotificationService) { 
+      this.message = "";
+    }
 
   ngOnInit(): void {
     if (this.authenticationService.isUserLoggedIn()) {
@@ -35,10 +38,12 @@ export class RegistrationComponent implements OnInit, OnDestroy {
           // this.sendNotification(NotificationType.SUCCESS, `A new account was created for ${response.username
           // }.
           // Please check your email for password to log in.`);
+          this.message = "Your account was successfully created!";
         },
         (errorResponse: HttpErrorResponse) => {
           this.sendNotification(NotificationType.ERROR, errorResponse.error.message);
           this.showLoading = false;
+          this.message = "An error occured while processing your request.";
         }
       )
     );

@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { CustomHttpResponse } from 'src/app/model/custom-http-response';
 import { User } from 'src/app/model/user';
 import { environment } from 'src/environments/environment';
+import { AuthenticationService } from './authentication.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ import { environment } from 'src/environments/environment';
 export class UserService {
   private host = environment.apiUrl;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private authService: AuthenticationService) { }
 
   public getUsers(): Observable<User[] | HttpErrorResponse> {
     return this.http.get<User[]>(`${this.host}/user/list`);
@@ -22,18 +23,33 @@ export class UserService {
   }
 
   public updateUser(formData: FormData): Observable<User> {
-    return this.http.post<User>(`${this.host}/api/user/update`, formData);
+    var myHeaders = new Headers();
+    myHeaders.append("Authorization", `Bearer ${this.authService.loadToken()}`);
+
+    var requestOptions = {
+      method: 'POST',
+      headers: myHeaders,
+      body: formData,
+      redirect: 'follow'
+    };
+
+    return this.http.post<User>(`${this.host}/api/user/update`, requestOptions);
   }
 
   public updateProfileImage(formData: FormData): Observable<HttpEvent<User> | HttpErrorResponse> {
     return this.http.post<User>(`${this.host}/user/updateProfileImage`, formData,
-    {reportProgress: true,
-      observe: 'events'
-    });
+      {
+        reportProgress: true,
+        observe: 'events'
+      });
   }
 
   public resetPassword(formData: FormData): Observable<User> {
     return this.http.post<User>(`${this.host}/api/user/update/password`, formData);
+  }
+
+  public becomeContentCreator(formData: FormData) {
+    return this.http.post<User>(`${this.host}/api/user/add-role`, formData);
   }
 
 
@@ -46,7 +62,7 @@ export class UserService {
   }
 
   public getUsersToLocalCache(): User[] {
-    if(localStorage.getItem('users')) {
+    if (localStorage.getItem('users')) {
       return JSON.parse(localStorage.getItem('users'));
     }
     return null;
@@ -76,4 +92,13 @@ export class UserService {
     formData.append('password', newPassword);
     return formData;
   }
+
+  public createUserFormDataContentCreator(userId: number, roleName: string) {
+    const formData = new FormData();
+    formData.append('userId', userId.toString());
+    formData.append('roleName', roleName);
+    return formData;
+
+  }
+
 }

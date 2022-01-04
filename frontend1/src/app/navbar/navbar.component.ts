@@ -12,6 +12,7 @@ export class NavbarComponent implements OnInit {
   }
 
   loggedIn: boolean;
+  contentCreator: boolean;
 
   ngOnInit(): void {
     if (localStorage.getItem("user")) {
@@ -20,6 +21,7 @@ export class NavbarComponent implements OnInit {
     else {
       this.loggedIn = false;
     }
+    this.contentCreator = this.authService.isUserContentCreator();
   }
 
 

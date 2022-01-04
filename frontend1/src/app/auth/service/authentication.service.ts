@@ -109,5 +109,15 @@ export class AuthenticationService {
     }
     return false;
   }
+
+  public isUserContentCreator(): boolean {
+    for (const role of this.getUserFromLocalCache().roles) {
+      if (role.name === "ROLE_CONTENT_CREATOR")
+      {
+        return true;
+      }
+    }
+    return false;
+  }
 }
 

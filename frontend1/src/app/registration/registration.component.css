@@ -68,3 +68,10 @@ html {
 .custom-checkbox .custom-control-input:checked ~ .custom-control-label::before {
   background-color: red !important;
 }
+
+.success-message
+{
+  color: green;
+  padding-top: 10px;
+  font-weight: 500;
+}
