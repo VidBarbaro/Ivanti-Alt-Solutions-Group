@@ -29,6 +29,10 @@ export class PackageDetailsComponent implements OnInit {
     )
   }
 
+  // public addToFavourites(): void {
+  //   this.packageService.
+  // }
+
   showOverview() {
     let packageInfo = document.getElementById("package-info-description")
     if (packageInfo !== null) {

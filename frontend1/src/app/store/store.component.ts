@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { NotificationType } from '../auth/enum/notification-type.enum';
 import { AuthenticationService } from '../auth/service/authentication.service';
 import { NotificationService } from '../auth/service/notification.service';
+import { UserService } from '../auth/service/user.service';
 import { Package } from '../model/package';
 import { User } from '../model/user';
 import { PackageService } from '../_services/package-service/package-service';

@@ -1,3 +1,4 @@
+import { Package } from "./package";
 import { Role } from "./role";
 
 export class User {
@@ -8,6 +9,7 @@ export class User {
     public email: string;
     public roles: Role[];
     public token: string;
+    public favourite_packages_id: Package[];
 
     constructor() {
         this.name = '';
@@ -15,6 +17,7 @@ export class User {
         this.email = '';
         this.roles = [];
         this.token = '';
+        this.favourite_packages_id = [];
     }
 
 

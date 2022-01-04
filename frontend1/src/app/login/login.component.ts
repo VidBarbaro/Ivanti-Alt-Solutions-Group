@@ -6,6 +6,7 @@ import { HeaderType } from '../auth/enum/header-type.enum';
 import { NotificationType } from '../auth/enum/notification-type.enum';
 import { AuthenticationService } from '../auth/service/authentication.service';
 import { NotificationService } from '../auth/service/notification.service';
+import { Role } from '../model/role';
 import { User } from '../model/user';
 
 @Component({
@@ -22,12 +23,11 @@ export class LoginComponent implements OnInit, OnDestroy {
 
 
   ngOnInit(): void {
-    //  if (this.authenticationService.isUserLoggedIn()) {
-    //    this.router.navigateByUrl('/home');    ///user/management
-    //  } else {
-    //    this.router.navigateByUrl('/login');
-    //  }
-
+    if (this.authenticationService.isUserLoggedIn()) {
+      this.router.navigateByUrl('/home');    ///user/management
+    } else {
+      this.router.navigateByUrl('/login');
+    }
   }
 
   public onLogin(username: string, password: string): void {

@@ -26,6 +26,10 @@ export class PackageService {
     //     return this.http.post<Package>(`${this.host}/user/add`, formData);
     //   }
 
+    public addPackageToFavourites(userId: number, packageId: number): Observable<Package | HttpErrorResponse> {
+        return this.http.post<Package>(`${this.host}/api/packages/favourites/add`, {userId, packageId});
+    }
+
     public addPackagesToLocalCache(packages: Package[]): void {
         localStorage.setItem('packages', JSON.stringify(packages));
     }

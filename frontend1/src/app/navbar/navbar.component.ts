@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { NotificationType } from '../auth/enum/notification-type.enum';
 import { AuthenticationService } from '../auth/service/authentication.service';
+import { NotificationService } from '../auth/service/notification.service';
 
 @Component({
   selector: 'app-navbar',
@@ -8,11 +11,11 @@ import { AuthenticationService } from '../auth/service/authentication.service';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor(private authService: AuthenticationService) {
+  constructor(private notificationService: NotificationService, private router: Router, private authService: AuthenticationService) {
   }
 
-  loggedIn: boolean;
-  contentCreator: boolean;
+  loggedIn: boolean = false;
+  contentCreator: boolean = false;
 
   ngOnInit(): void {
     if (localStorage.getItem("user")) {
@@ -33,7 +36,17 @@ export class NavbarComponent implements OnInit {
   }
 
   logOut(){
-    this.authService.logOut();
+      this.authService.logOut();
+      this.router.navigate(['/login']);
+      this.sendNotification(NotificationType.SUCCESS, 'You have been logged out successfully');
+  }
+
+  private sendNotification(notificationType: NotificationType, message: string): void {
+    if (message) {
+      this.notificationService.notify(notificationType, message);
+    } else {
+      this.notificationService.notify(notificationType, 'An error occurred. Please try again.');
+    }
   }
 
 }
