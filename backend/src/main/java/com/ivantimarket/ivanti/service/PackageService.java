@@ -5,6 +5,7 @@ import com.ivantimarket.ivanti.dto._mapper.PackageMapper;
 import com.ivantimarket.ivanti.dto._mapper.UserMapper;
 import com.ivantimarket.ivanti.dto.packages.NewPackageDTO;
 import com.ivantimarket.ivanti.dto.packages.PackageOverviewDTO;
+import com.ivantimarket.ivanti.exception.TitleExistsException;
 import com.ivantimarket.ivanti.model.Package;
 import com.ivantimarket.ivanti.model.SystemRequirements;
 import com.ivantimarket.ivanti.model.User;
@@ -68,9 +69,12 @@ public class PackageService {
         return packageRepository.save(pckg);
     }
 
-    public Package addTestPackage(Package newPackage){
-        packageRepository.save(newPackage);
-        return newPackage;
+    public Package addTestPackage(Package newPackage) throws TitleExistsException {
+        if(!this.testTitleUnique(newPackage.getTitle())){throw new TitleExistsException("Title already exists. Add an unique one.");}
+        else{
+            packageRepository.save(newPackage);
+            return newPackage;
+        }
     }
 
     public List<Package> getPackagesUploadedByUser(long userId)
@@ -85,6 +89,18 @@ public class PackageService {
         }
         return packages;
     }
+    public Package updatePackage(Long id, String title, String intro, String processorType, String ram, String graphicsCard) throws TitleExistsException {
+        if(!this.testTitleUnique(title)){throw new TitleExistsException("Title already exists. Add an unique one.");}
+        else{
+            Package updatedPackage = this.getPackage(id);
+            updatedPackage.setTitle(title);
+            updatedPackage.setIntro(intro);
+            updatedPackage.setSystemRequirements(new SystemRequirements(processorType, ram, graphicsCard));
+            packageRepository.save(updatedPackage);
+            return updatedPackage;
+        }
+    }
+
 
     public void deletePackage(int id) {
         packageRepository.deleteById(id);
@@ -126,6 +142,16 @@ public class PackageService {
             }
         }
         return false;
+    }
+
+    private boolean testTitleUnique(String title) throws TitleExistsException {
+        for (PackageOverviewDTO p:
+                this.getAllPackages()) {
+            if(p.getTitle().equals(title)){
+                return false;
+            }
+        }
+        return true;
     }
 
 }

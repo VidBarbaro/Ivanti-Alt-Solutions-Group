@@ -6,6 +6,7 @@ import com.ivantimarket.ivanti.dto.packages.NewPackageDTO;
 import com.ivantimarket.ivanti.dto.packages.PackageOverviewDTO;
 import com.ivantimarket.ivanti.dto.user.NewUserDTO;
 import com.ivantimarket.ivanti.dto.user.UserDTO;
+import com.ivantimarket.ivanti.exception.TitleExistsException;
 import com.ivantimarket.ivanti.model.Package;
 import com.ivantimarket.ivanti.model.SystemRequirements;
 import com.ivantimarket.ivanti.model.User;
@@ -30,6 +31,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.LocalDateTime;
 import java.util.List;
+
+import static org.springframework.http.HttpStatus.OK;
 
 @Slf4j
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -83,8 +86,21 @@ public class PackageController {
         return packageService.addNewPackage(newPackage, version, requirements);
     }
     @PostMapping("/add-new-package")
-    public Package addNewPackage(@RequestBody Package newPackage){
+    public Package addNewPackage(@RequestBody Package newPackage) throws TitleExistsException {
         return this.packageService.addTestPackage(newPackage);
+    }
+
+    @PostMapping("/update-package")
+    public ResponseEntity<Package> updatePackage(@RequestParam("id") Long id,
+                                           @RequestParam("title") String title,
+                                           @RequestParam("intro") String intro,
+                                           @RequestParam("processorType") String processorType,
+                                           @RequestParam("ram") String ram,
+                                           @RequestParam("graphicsCard") String graphicsCard) throws TitleExistsException {
+        //add exception for unique title
+        Package updatedPackage = packageService.updatePackage(id, title, intro, processorType, ram, graphicsCard);
+
+        return new ResponseEntity<>(updatedPackage, OK);
     }
 
 
