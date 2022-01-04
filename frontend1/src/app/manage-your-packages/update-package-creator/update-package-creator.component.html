@@ -1,5 +1,6 @@
 <div class="testbox">
-    <form #createNewPackage="ngForm"
+    <form #createNewPackage="ngForm" (ngSubmit)="onUpdatePackage(titleInput.value, introInput.value, 
+    processorTypeInput.value, ramInput.value, graphicsCardInput.value)"
         >
         <div class="banner">
             <h1>Update Package</h1>
@@ -8,7 +9,7 @@
         <div class="item">
             <label for="name">Name of the package<span>*</span></label>
             <div class="item">
-                <input type="text" name="nameInput" placeholder={{currentPackage.title}} #nameInput [(ngModel)]="currentPackage.title"/>
+                <input type="text" name="titleInput" placeholder={{currentPackage.title}} #titleInput [(ngModel)]="currentPackage.title"/>
             </div>
         </div>
         <!-- <div class="item">
@@ -61,5 +62,6 @@
         <div class="btn-block">
             <button type="submit">Update The Package</button>
         </div>
+        <p class="update-message">{{message}}</p>
     </form>
 </div>

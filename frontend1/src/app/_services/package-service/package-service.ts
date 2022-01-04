@@ -45,6 +45,20 @@ export class PackageService {
         return null;
     }
 
+    public createPackageFormDataUpdate(id: number, title: string, intro: string, processorType: string, ram: string, graphicsCard: string): FormData {
+        const formData = new FormData();
+        formData.append('id', id.toString());
+        formData.append('title', title);
+        formData.append('intro', intro);
+        formData.append('processorType', processorType);
+        formData.append('ram', ram);
+        formData.append('graphicsCard', graphicsCard);
+        return formData;
+    }
+    public updatePackage(formData: FormData): Observable<Package> {
+        return this.http.post<Package>(`${this.host}/api/packages/update-package`, formData);
+    }
+
     // public addPackage(formData: FormData): Observable<Package> {
     //     return this.http.post<Package>(`${this.host}/api/packages/create`, formData);
     // }
