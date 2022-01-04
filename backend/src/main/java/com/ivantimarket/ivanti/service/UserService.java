@@ -89,7 +89,8 @@ public class UserService implements UserDetailsService {
 
         User user = userMapper.toUser(userDTO);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        addRoleToUser(user, userDTO.getRoleName());
+//        addRoleToUser(user, userDTO.getRoleName()); this is commented because in the frontend on register it doesn't add any role
+        addRoleToUser(user, "ROLE_CUSTOMER");
         return userMapper.toUserDto(userRepo.save(user));
     }
 

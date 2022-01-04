@@ -82,7 +82,7 @@ public class UserController {
         userService.refreshToken(request, response);
     }
 
-    @PostMapping("/add-role")
+    @PostMapping("/user/add-role")
     public ResponseEntity<User> addRoleToUser(HttpServletRequest request, HttpServletResponse response,
             @RequestParam("userId")long userId, @RequestParam("roleName")String roleName) {
         User user = userService.getUser(userId);
