@@ -14,5 +14,6 @@ public class UserAuthDTO {
     private String username;
     private String email;
     private Set<Role> roles = new HashSet<>();
+    private Set<Long> favourite_packages_id =  new HashSet<>();
     private Map<String, String> tokens;
 }

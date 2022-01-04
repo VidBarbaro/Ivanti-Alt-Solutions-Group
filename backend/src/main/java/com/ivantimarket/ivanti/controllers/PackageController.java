@@ -184,6 +184,7 @@ public class PackageController {
 
         return fileData;
     }
+
     //not added in securityconfig
     @PostMapping("/favourites/add")
     public Package addPackageToFavourites(@RequestParam long userId, @RequestParam long packageId)

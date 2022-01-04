@@ -37,7 +37,7 @@ public class User {
     private Set<Long> favourite_packages_id = new HashSet<>();
     private Set<Long> uploaded_packages_id = new HashSet<>();
 
-    public User(int id, String name, String username, String password, String email) {
+    public User(long id, String name, String username, String password, String email) {
         this.id = id;
         this.name = name;
         this.username = username;

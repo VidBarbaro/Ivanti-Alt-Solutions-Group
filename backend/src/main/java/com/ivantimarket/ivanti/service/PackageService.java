@@ -29,6 +29,7 @@ public class PackageService {
     private final PackageMapper packageMapper;
     private final UserRepository userService;
     private final UserMapper userMapper;
+
     public List<PackageOverviewDTO> getAllPackages() {
 
         List<Package> packages = packageRepository.findAll();

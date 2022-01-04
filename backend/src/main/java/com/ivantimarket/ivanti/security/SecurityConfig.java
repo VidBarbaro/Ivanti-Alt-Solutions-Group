@@ -43,7 +43,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 "/api/user/add-role").permitAll();
 
         http.authorizeRequests().antMatchers("/api/login/**","/api/register/**", "/api/token/refresh/**", "/api/users/**", "/api/packages/get/**", "/api/packages/","/api/packages/download**","/user/login/**", "/api/packages/create",
-                "/api/packages/add-new-package", "/api/packages/add-version/{packageId}", "/api/packages/uploaded/{userId}", "/api/packages/versions/{packageId}", "/api/packages/system-requirements/{packageId}", "/api/packages/update-package").permitAll();
+                "/api/packages/add-new-package", "/api/packages/add-version/{packageId}", "/api/packages/uploaded/{userId}", "/api/packages/versions/{packageId}", "/api/packages/system-requirements/{packageId}", "/api/packages/update-package", "/api/packages/favourites/add").permitAll();
 
         http.authorizeRequests().antMatchers(GET, "/api/user/**").hasAnyAuthority("ROLE_USER");
         http.authorizeRequests().antMatchers(POST, "/api/user/update","/api/user/update/password").hasAnyAuthority("ROLE_CUSTOMER", "ROLE_CONTENT_CREATOR");

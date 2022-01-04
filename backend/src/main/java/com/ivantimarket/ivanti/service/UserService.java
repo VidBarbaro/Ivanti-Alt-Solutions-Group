@@ -99,7 +99,9 @@ public class UserService implements UserDetailsService {
         User user = userRepo.findById(id);
         user.setFirstTime(1);
         userRepo.save(user);
+        return user;
     }
+
     public User updateUser(String name, String email, long id) {
         User user1 = userRepo.findById(id);
         if (user1 != null) {
