@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AuthenticationService } from 'src/app/auth/service/authentication.service';
 import { UserService } from 'src/app/auth/service/user.service';
+import { CustomHttpResponse } from 'src/app/model/custom-http-response';
 import { Package } from 'src/app/model/package';
 import { SystemRequirements } from 'src/app/model/systemRequirements';
 import { PackageVersion } from 'src/app/model/version';
@@ -25,10 +26,6 @@ export class PackageService {
     //   public addPackage(formData: FormData): Observable<Package | HttpErrorResponse> {
     //     return this.http.post<Package>(`${this.host}/user/add`, formData);
     //   }
-
-    public addPackageToFavourites(userId: number, packageId: number): Observable<Package | HttpErrorResponse> {
-        return this.http.post<Package>(`${this.host}/api/packages/favourites/add`, {userId, packageId});
-    }
 
     public addPackagesToLocalCache(packages: Package[]): void {
         localStorage.setItem('packages', JSON.stringify(packages));
@@ -59,6 +56,28 @@ export class PackageService {
         formData.append('graphicsCard', graphicsCard);
         return formData;
     }
+
+    public createAddFavouritePackageFormData(userId: number, packageId: number): FormData {
+        const formData = new FormData();
+        formData.append('userId', userId.toString());
+        formData.append('packageId', packageId.toString());
+        return formData;
+    }
+
+    public addPackageToFavourites(formData: FormData): Observable<Package> {
+        return this.http.post<Package>(`${this.host}/api/packages/favourites/add`, formData);
+    }
+
+    public removePackageFromFavourites(userId: number, packageId: number): Observable<CustomHttpResponse> {
+        const params = new HttpParams().set('userId', userId).set('packageId', packageId);
+        return this.http.delete<CustomHttpResponse>(`${this.host}/api/packages/favourites/remove`, {params});
+    }
+    
+    public isPackageInFavourites(userId: number, packageId: number) {
+        const params = new HttpParams().set('userId', userId).set('packageId', packageId);
+        return this.http.get<Package>(`${this.host}/api/packages/favourites/check`, { params });
+    }
+
     public updatePackage(formData: FormData): Observable<Package> {
         return this.http.post<Package>(`${this.host}/api/packages/update-package`, formData);
     }

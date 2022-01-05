@@ -17,10 +17,15 @@
                 </p>
             </div>
             <div>
-                <button mat-raised-button>
+                <button mat-raised-button (click)="removePackageFromFavourites(user.id, package.id)" *ngIf="isPackageFavourite">
+                    Remove from favourites
+                    <mat-icon>star</mat-icon>
+                </button>
+                <button mat-raised-button (click)="addPackageToFavourites(user.id, package.id)" *ngIf="!isPackageFavourite">
                     Add to favourites
                     <mat-icon>star</mat-icon>
                 </button>
+                <p>{{message}}</p>
             </div>
         </div>
     </div>
