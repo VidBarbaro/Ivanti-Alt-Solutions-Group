@@ -128,6 +128,7 @@ public class PackageService {
         }
         return false;
     }
+
     public boolean addPackageToFavouritePackages(long userId, long packageId){
         User user = userService.findById(userId);
         Package mPackage = getPackage(packageId);
@@ -138,6 +139,20 @@ public class PackageService {
         }
         return false;
     }
+
+    public Package isPackageAddedToFavourites(long userId, long packageId)
+    {
+        User user = this.userService.findById(userId);
+        for(long id : user.getFavourite_packages_id())
+        {
+            if(id == packageId)
+            {
+                return packageRepository.findById(packageId);
+            }
+        }
+        return null;
+    }
+
     public boolean removePackageToFavouritePackages(long userId, long packageId){
         User user = userService.findById(userId);
         if(user != null){

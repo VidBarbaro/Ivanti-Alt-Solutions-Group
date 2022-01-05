@@ -185,20 +185,25 @@ public class PackageController {
         return fileData;
     }
 
-    //not added in securityconfig
     @PostMapping("/favourites/add")
-    public Package addPackageToFavourites(@RequestParam long userId, @RequestParam long packageId)
+    public Package addPackageToFavourites(@RequestParam String userId, @RequestParam String packageId)
     {
-        Package mPackage = packageService.getPackage(packageId);
+        Package mPackage = packageService.getPackage(Integer.parseInt(packageId));
         LOG.info("{}",mPackage.getId());
         if(mPackage!=null){
-            packageService.addPackageToFavouritePackages(userId,packageId);
+            packageService.addPackageToFavouritePackages(Integer.parseInt(userId),Integer.parseInt(packageId));
             return mPackage;
 
         }
         return null;
     }
-    //not added in securityconfig
+
+    @GetMapping("/favourites/check")
+    public Package isPackageAddedToFavourites(@RequestParam Long userId, @RequestParam Long packageId)
+    {
+        return packageService.isPackageAddedToFavourites(userId, packageId);
+    }
+
     @DeleteMapping("/favourites/remove")
     public boolean removePackageToFavourites(@RequestParam long userId, @RequestParam long packageId)
     {
