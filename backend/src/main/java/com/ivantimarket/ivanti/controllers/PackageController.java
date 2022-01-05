@@ -190,10 +190,11 @@ public class PackageController {
     public Package addPackageToFavourites(@RequestParam long userId, @RequestParam long packageId)
     {
         Package mPackage = packageService.getPackage(packageId);
+        LOG.info("{}",mPackage.getId());
         if(mPackage!=null){
-            if(packageService.addPackageToFavouritePackages(userId,packageId)) {
-                return mPackage;
-            }
+            packageService.addPackageToFavouritePackages(userId,packageId);
+            return mPackage;
+
         }
         return null;
     }

@@ -113,6 +113,7 @@ public class PackageService {
         if(user != null && mPackage != null){
 
             user.getDownloaded_packages_id().add(packageId);
+            userService.save(user);
             return true;
         }
         return false;
@@ -121,6 +122,7 @@ public class PackageService {
         User user = userService.findById(userId);
         if(user != null){
             if(user.getDownloaded_packages_id().remove(packageId)) {
+                userService.save(user);
                 return true;
             }
         }
@@ -131,6 +133,7 @@ public class PackageService {
         Package mPackage = getPackage(packageId);
         if(user != null && !user.getFavourite_packages_id().contains(packageId)){
             user.getFavourite_packages_id().add(packageId);
+            userService.save(user);
             return true;
         }
         return false;
@@ -139,6 +142,7 @@ public class PackageService {
         User user = userService.findById(userId);
         if(user != null){
             if(user.getFavourite_packages_id().remove(packageId)) {
+                userService.save(user);
                 return true;
             }
         }
