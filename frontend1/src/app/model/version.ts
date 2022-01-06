@@ -1,6 +1,6 @@
 export class PackageVersion {
-    public name: String;
-    public readme: String;
+    public name: string;
+    public readme: string;
     public url: string;
 
     // constructor(name: string, readme: string, url: string) {
@@ -9,7 +9,7 @@ export class PackageVersion {
     //     this.url = url;
     // }
 
-    constructor(name: String, readme: String) {
+    constructor(name: string, readme: string) {
         this.name = name;
         this.readme = readme;
     }

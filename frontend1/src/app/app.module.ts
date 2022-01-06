@@ -36,6 +36,7 @@ import { UploadedPackagesCardComponent } from './manage-your-packages/uploaded-p
 import { UploadedPackagesComponent } from './manage-your-packages/uploaded-packages/uploaded-packages.component';
 import { UploadedPackageDetailsComponent } from './manage-your-packages/uploaded-package-details/uploaded-package-details.component';
 import { UpdatePackageCreatorComponent } from './manage-your-packages/update-package-creator/update-package-creator.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -62,7 +63,7 @@ import { UpdatePackageCreatorComponent } from './manage-your-packages/update-pac
     UploadedPackagesCardComponent,
     UploadedPackagesComponent,
     UploadedPackageDetailsComponent,
-    UpdatePackageCreatorComponent
+    UpdatePackageCreatorComponent,
   ],
   imports: [
     BrowserModule,
@@ -72,7 +73,8 @@ import { UpdatePackageCreatorComponent } from './manage-your-packages/update-pac
     HttpClientModule, 
     NotificationModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgbModule
   ],
   providers: [NotificationService, AuthenticationGuard, AuthenticationService, UserService, { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
   bootstrap: [AppComponent],

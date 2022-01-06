@@ -68,11 +68,14 @@
     <h1>Saved Packages</h1>
 
     <div class="wrapper-packages">
+        <li *ngFor="let p of favouritePackages">
+            <app-package [id]="p.id" [title]="p.title" [intro]="p.intro"></app-package>
+        </li>
+        <!-- <app-package></app-package>
         <app-package></app-package>
         <app-package></app-package>
         <app-package></app-package>
         <app-package></app-package>
-        <app-package></app-package>
-        <app-package></app-package>
+        <app-package></app-package> -->
     </div>
 </div>

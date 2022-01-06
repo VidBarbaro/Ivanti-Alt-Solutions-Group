@@ -5,6 +5,8 @@ import { UserService } from '../auth/service/user.service';
 import { NotificationType } from '../auth/enum/notification-type.enum';
 import { NotificationService } from '../auth/service/notification.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Package } from '../model/package';
+import { PackageService } from '../_services/package-service/package-service';
 
 @Component({
   selector: 'app-profile-page',
@@ -16,8 +18,10 @@ export class ProfilePageComponent implements OnInit {
   public message: string;
   public isContentCreator: boolean;
   public contentCreatorToShow: string;
+  public favouritePackages: Package[] = [];
 
-  constructor(private authenticationService: AuthenticationService, private userService: UserService, private notificationService: NotificationService) {
+  constructor(private authenticationService: AuthenticationService, private userService: UserService, private notificationService: NotificationService,
+    private packageService: PackageService) {
     this.loggedInUser = authenticationService.getUserFromLocalCache();
     this.message = "";
     this.isContentCreator = this.authenticationService.isUserContentCreator();
@@ -27,10 +31,28 @@ export class ProfilePageComponent implements OnInit {
     else {
       this.contentCreatorToShow = "No";
     }
+    this.getFavouritePackages();
+
+  }
+
+  public getFavouritePackages(): void {
+    for (const p of this.loggedInUser.favourite_packages_id) {
+      this.getPackage(p);
+
+    }
+  }
+
+  public getPackage(idPackage: number): void {
+    this.packageService.getPackageById(idPackage).subscribe(
+      (response: Package) => {
+        this.favouritePackages.push(response)
+      }
+    )
   }
 
   ngOnInit(): void {
   }
+
 
   public becomeContentCreator() {
     const formData = this.userService.createUserFormDataContentCreator(this.loggedInUser.id, "ROLE_CONTENT_CREATOR");

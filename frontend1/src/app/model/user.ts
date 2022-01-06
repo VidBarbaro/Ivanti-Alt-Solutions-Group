@@ -9,7 +9,7 @@ export class User {
     public email: string;
     public roles: Role[];
     public token: string;
-    public favourite_packages_id: Package[];
+    public favourite_packages_id: number[];
 
     constructor() {
         this.name = '';
