@@ -111,20 +111,20 @@ export class PackageDetailsComponent implements OnInit {
     )
   }
 
-  public submitRating() {
-    if (this.currentRate !== 0) {
-      this.reviewService.addReview(this.package.id, this.currentRate).subscribe(
-        (response: Review) => {
-          this.sendNotification(NotificationType.SUCCESS, `Reviews added succesfully`);
-          this.submitReviewMessage = "The review was successfully added!"
-        },
-        (errorResponse: HttpErrorResponse) => {
-          this.sendNotification(NotificationType.ERROR, errorResponse.error);
-          this.submitReviewMessage = errorResponse.message;
-        }
-      )
-    }
-  }
+  // public submitRating() {
+  //   if (this.currentRate !== 0) {
+  //     this.reviewService.addReview(this.package.id, this.currentRate).subscribe(
+  //       (response: Review) => {
+  //         this.sendNotification(NotificationType.SUCCESS, `Reviews added succesfully`);
+  //         this.submitReviewMessage = "The review was successfully added!"
+  //       },
+  //       (errorResponse: HttpErrorResponse) => {
+  //         this.sendNotification(NotificationType.ERROR, errorResponse.error);
+  //         this.submitReviewMessage = errorResponse.message;
+  //       }
+  //     )
+  //   }
+  // }
 
   showOverview() {
     let packageInfo = document.getElementById("package-info-description")

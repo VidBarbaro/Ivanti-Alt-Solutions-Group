@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { NotificationType } from '../auth/enum/notification-type.enum';
 import { AuthenticationService } from '../auth/service/authentication.service';
 import { NotificationService } from '../auth/service/notification.service';
+import { User } from '../model/user';
+import { ModalService } from '../_modal';
 
 @Component({
   selector: 'app-navbar',
@@ -11,11 +13,14 @@ import { NotificationService } from '../auth/service/notification.service';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor(private notificationService: NotificationService, private router: Router, private authService: AuthenticationService) {
+  constructor(private notificationService: NotificationService, private router: Router, private authService: AuthenticationService, private modalService: ModalService) {
   }
 
   loggedIn: boolean = false;
   contentCreator: boolean = false;
+  //isUserIncremented: boolean;
+  user : User;
+
 
   ngOnInit(): void {
     if (localStorage.getItem("user")) {
@@ -46,6 +51,23 @@ export class NavbarComponent implements OnInit {
       this.notificationService.notify(notificationType, message);
     } else {
       this.notificationService.notify(notificationType, 'An error occurred. Please try again.');
+    }
+  }
+
+  openModal(id: string) {
+    this.modalService.open(id);
+  }
+
+  closeModal(id: string) {
+     this.modalService.close(id);
+  } 
+
+  isFirstTime(): boolean{
+    if (this.user.firstTime == 0){
+      return true;
+    }
+    else{
+      return false;
     }
   }
 

@@ -1,5 +1,8 @@
 <mat-toolbar color="primary" class="navbar">
-    <div><a><img src="../assets/images/Ivanti_Logo_RGB_white.png" alt="Ivanti_Logo_White" class="logo"></a></div>
+    <div>
+        <a><img src="../assets/images/Ivanti_Logo_RGB_white.png" alt="Ivanti_Logo_White" class="logo"></a>
+        <a><img src="../assets/images/tutorial3.png" *ngIf="loggedIn && isFirstTime" (click)="openModal('custom-modal-2')" ></a>
+    </div>
     <div class="routes">
         <a routerLink="/home">Home</a>
         <a routerLink="/store">Store</a>
@@ -13,4 +16,43 @@
         <img *ngIf="showMenu" src="../../assets/images/hamburger_button.svg" alt="menu" class="menuIcon">
         <img *ngIf="showMenu == false" src="../../assets/images/close_button.svg" alt="close" class="closeIcon">
     </button>
+
+    <jw-modal id="custom-modal-1">
+        <h1>A Custom Modal Window!</h1>
+        <!-- <p>Home page text: <input type="text" [(ngModel)]="bodyText" /></p>  -->
+        <button (click)="closeModal('custom-modal-1');">Close</button>
+    </jw-modal>
+    
+    <!-- we are using this one  -->
+    <jw-modal id="custom-modal-2">              
+        <h1 style="height:1000px">Here we will have the intro!</h1>
+        <section class= "product-modal">
+            <div class= "containser-fluid">
+                <div class="slider-wrap">
+                    <div class="slider-main">
+                        <div class="item-modal">
+                            <div class="text">1</div>
+                        </div>
+                        <div class="item-modal">
+                            <div class="text">2</div>
+                        </div>
+                        <div class="item-modal">
+                            <div class="text">3</div>
+                        </div>
+                        <div class="item-modal">
+                            <div class="text">4</div>
+                        </div>
+                        <div class="item-modal">
+                            <div class="text">5</div>
+                        </div>
+                    </div>
+                    <div class="button-area">
+                        <button type="button" class= "prev" appPrev>Prev</button>
+                        <button type="button" class= "next" appNext>Next</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <button (click)="closeModal('custom-modal-2');">Close</button>
+    </jw-modal>
 </mat-toolbar>

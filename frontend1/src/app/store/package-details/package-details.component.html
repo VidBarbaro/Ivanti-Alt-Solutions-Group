@@ -13,11 +13,11 @@
                         Remove from favourites
                         <mat-icon>star</mat-icon>
                     </button>
-                    <button mat-raised-button (click)="addPackageToFavourites(user.id, package.id)"
+                    <!-- <button mat-raised-button (click)="addPackageToFavourites(user.id, package.id)"
                         *ngIf="!isPackageFavourite">
                         Add to favourites
                         <mat-icon>star</mat-icon>
-                    </button>
+                    </button> -->
                     <p>{{message}}</p>
                 </div>
             </div>
@@ -120,7 +120,7 @@
     <div class="leave-rating">
         <h2 class="rate-heading">Rate this package</h2>
         <ngb-rating [max]="5" [(rate)]="currentRate" class="star-ratings"></ngb-rating>
-        <button (click)="submitRating()" class="add-rating">Submit Rating</button>
+        <!-- <button (click)="submitRating()" class="add-rating">Submit Rating</button> -->
         <p class="add-rating-message">{{submitReviewMessage}}</p>
     </div>
     <div class="menu-download">
