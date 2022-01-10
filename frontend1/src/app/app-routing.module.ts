@@ -49,7 +49,7 @@ const routes: Routes = [
   },
   {
     path: 'manage-packages',
-    canActivate: [AuthenticationGuard],
+    // canActivate: [AuthenticationGuard],
     data: {
       role: "ROLE_CONTENT_CREATOR"
     },

@@ -60,6 +60,7 @@ export class NavbarComponent implements OnInit {
 
   closeModal(id: string) {
      this.modalService.close(id);
+     
   } 
 
   isFirstTime(): boolean{

@@ -18,14 +18,15 @@ export class ReviewService {
 
     constructor(private http: HttpClient, private authService: AuthenticationService) { }
 
-    public addVersionToPackage(idPackage: number, versionName: string, versionReadMe: string): Observable<Package> {
-        return this.http.post<any>(`${this.host}/api/packages/add-version/${idPackage}`, {
-            "name": versionName,
-            "readme": versionReadMe
-        });
-    }
-
     public getReviewsOfPackage(packageId: number) {
         return this.http.get<Review[]>(`${this.host}/api/reviews/package/${packageId}`, { observe: 'response' });
+    }
+
+    public addReviewToPackage(userId: number, packageId: number, rating: number): Observable<Review> {
+        return this.http.post<any>(`${this.host}/api/review/create`, {
+            "userId": userId,
+            "packageId": packageId,
+            "rating": rating
+        });
     }
 }
