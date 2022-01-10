@@ -7,14 +7,9 @@ import com.ivantimarket.ivanti.dto.packages.PackageOverviewDTO;
 import com.ivantimarket.ivanti.dto.user.NewUserDTO;
 import com.ivantimarket.ivanti.dto.user.UserDTO;
 import com.ivantimarket.ivanti.exception.TitleExistsException;
+import com.ivantimarket.ivanti.model.*;
 import com.ivantimarket.ivanti.model.Package;
-import com.ivantimarket.ivanti.model.SystemRequirements;
-import com.ivantimarket.ivanti.model.User;
-import com.ivantimarket.ivanti.model.Version;
-import com.ivantimarket.ivanti.service.FileService;
-import com.ivantimarket.ivanti.service.PackageService;
-import com.ivantimarket.ivanti.service.SequenceGeneratorService;
-import com.ivantimarket.ivanti.service.UserService;
+import com.ivantimarket.ivanti.service.*;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -49,7 +44,7 @@ public class PackageController {
     private final SequenceGeneratorService sequenceGeneratorService;
 
     public PackageController(PackageService packageService, SequenceGeneratorService sequenceGeneratorService,
-                             UserService userService, FileService fileService) {
+                             FileService fileService) {
         this.packageService = packageService;
         this.sequenceGeneratorService = sequenceGeneratorService;
         this.fileService = fileService;
@@ -215,18 +210,7 @@ public class PackageController {
         }
         return false;
     }
-    //not added in securityconfig
-    @DeleteMapping("/downloaded/remove")
-    public boolean removePackageFromDownloaded(@RequestParam long userId, @RequestParam long packageId)
-    {
-        Package mPackage = packageService.getPackage(packageId);
-        if(mPackage!=null){
-            if(packageService.removePackageToDownloadedPackages(userId,packageId)) {
-                return true;
-            }
-        }
-        return false;
-    }
+
     @PostMapping("/add-version/{packageId}")
     public Package addVersionToPackage(@PathVariable long packageId, @RequestBody Version newVersion)
     {
