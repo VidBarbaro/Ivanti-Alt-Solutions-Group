@@ -21,10 +21,14 @@ public class Download {
     @NotNull
     private long packageId;
 
-    public Download(long id, long userId, long packageId) {
+    @NotNull
+    private String versionName;
+
+    public Download(long id, long userId, long packageId, String versionName) {
         this.id = id;
         this.userId = userId;
         this.packageId = packageId;
+        this.versionName = versionName;
     }
 
     public long getId() {
@@ -50,4 +54,8 @@ public class Download {
     public void setPackageId(long packageId) {
         this.packageId = packageId;
     }
+
+    public String getVersionName() {return versionName;}
+
+    public void setVersionName(String versionName) {this.versionName = versionName;}
 }

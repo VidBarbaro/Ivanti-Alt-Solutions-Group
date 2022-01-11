@@ -62,5 +62,4 @@ public class DownloadController {
         return ResponseEntity.ok().body(downloadService.getByPackageId(packageId));
     }
 
-
 }
