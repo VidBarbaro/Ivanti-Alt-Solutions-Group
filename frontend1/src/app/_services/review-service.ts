@@ -4,7 +4,6 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AuthenticationService } from 'src/app/auth/service/authentication.service';
 import { CustomHttpResponse } from 'src/app/model/custom-http-response';
-import { Package } from 'src/app/model/package';
 
 import { environment } from 'src/environments/environment';
 import { Review } from '../model/review';

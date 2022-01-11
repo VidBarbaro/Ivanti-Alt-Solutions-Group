@@ -18,7 +18,7 @@ export class ProfilePageComponent implements OnInit {
   public message: string;
   public isContentCreator: boolean;
   public contentCreatorToShow: string;
-  public favouritePackages: Package[] = [];
+  public favouritePackages: Package[];
 
   constructor(private authenticationService: AuthenticationService, private userService: UserService, private notificationService: NotificationService,
     private packageService: PackageService) {
@@ -38,7 +38,6 @@ export class ProfilePageComponent implements OnInit {
   public getFavouritePackages(): void {
     for (const p of this.loggedInUser.favourite_packages_id) {
       this.getPackage(p);
-
     }
   }
 
@@ -51,6 +50,7 @@ export class ProfilePageComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // this.getFavouritePackages();
   }
 
 

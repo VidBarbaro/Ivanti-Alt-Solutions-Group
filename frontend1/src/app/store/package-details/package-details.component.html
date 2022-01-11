@@ -130,8 +130,9 @@
                 <th>{{version.name}}</th>
                 <th>{{version.readme}}</th>
                 <th>
-                    <button class="download-version" id="download" (click)="downloadVersion(version.name)"
-                        type="button"><i class="fa fa-download"></i> Download
+                    <button class="download-version" id="download"
+                        (click)="downloadVersion(version.name, version.readme)" type="button"><i
+                            class="fa fa-download"></i> Download
                         Version</button>
                 </th>
             </tr>

@@ -5,12 +5,16 @@ import { NotificationType } from 'src/app/auth/enum/notification-type.enum';
 import { AuthenticationService } from 'src/app/auth/service/authentication.service';
 import { NotificationService } from 'src/app/auth/service/notification.service';
 import { CustomHttpResponse } from 'src/app/model/custom-http-response';
+import { Download } from 'src/app/model/download';
 import { Package } from 'src/app/model/package';
 import { Review } from 'src/app/model/review';
 import { User } from 'src/app/model/user';
 import { PackageVersion } from 'src/app/model/version';
+import { DownloadService } from 'src/app/_services/download-service';
 import { PackageService } from 'src/app/_services/package-service/package-service';
 import { ReviewService } from 'src/app/_services/review-service';
+import * as JSZip from 'jszip';
+import * as FileSaver from 'file-saver';
 
 @Component({
   selector: 'app-package-details',
@@ -18,8 +22,8 @@ import { ReviewService } from 'src/app/_services/review-service';
   styleUrls: ['./package-details.component.css']
 })
 export class PackageDetailsComponent implements OnInit {
-  package: Package = null;
-  user: User = null;
+  public package: Package = null;
+  public user: User = null;
   message: string = null;
   isPackageFavourite: boolean;
   versions: PackageVersion[];
@@ -27,13 +31,15 @@ export class PackageDetailsComponent implements OnInit {
   submitReviewMessage: string = null;
   packageReviews: Review[];
   nrReviews: number;
+  downloadedVersionsFromPackage: Download[];
 
   constructor(
     private packageService: PackageService,
     private router: ActivatedRoute,
     private authenticationService: AuthenticationService,
     private notificationService: NotificationService,
-    private reviewService: ReviewService) {
+    private reviewService: ReviewService,
+    private downloadService: DownloadService) {
   }
 
   ngOnInit(): void {
@@ -65,6 +71,17 @@ export class PackageDetailsComponent implements OnInit {
     )
   }
 
+  public getDownloadsOfVersionFromUser(): void {
+    this.reviewService.getReviewsOfPackage(this.router.snapshot.params.id).subscribe(
+      (response: HttpResponse<Review[]>) => {
+        this.packageReviews = response.body;
+        this.nrReviews = this.packageReviews.length;
+        console.log(response);
+
+      }
+    )
+  }
+
 
   public isPackageInFavourites(userId: number, packageId: number) {
     this.packageService.isPackageInFavourites(userId, packageId).subscribe(
@@ -79,6 +96,20 @@ export class PackageDetailsComponent implements OnInit {
       (errorResponse: HttpErrorResponse) => {
         this.isPackageFavourite = false;
         console.log(this.isPackageFavourite);
+      }
+    )
+  }
+
+  public wasVersionDownloadedBefore(userId: number, packageId: number, versionName: string): any {
+    const formData = this.downloadService.createWasVersionDownloadedBefore(userId, packageId, versionName);
+    this.downloadService.wasVersionDownloadedBefore(formData).subscribe(
+      (response: boolean) => {
+        this.sendNotification(NotificationType.SUCCESS, "")
+        return response;
+      },
+      (errorResponse: HttpErrorResponse) => {
+        this.sendNotification(NotificationType.ERROR, errorResponse.error.message);
+        return null;
       }
     )
   }
@@ -160,12 +191,22 @@ export class PackageDetailsComponent implements OnInit {
     }
   }
 
-  public downloadVersion(versionName: string) {
-    var element = document.createElement('a');
-    element.setAttribute('href', 'data:text/plain;charset=utf-8, ' + encodeURIComponent(versionName));
-    element.setAttribute('download', `${this.package.title} ${versionName}`);
-    document.body.appendChild(element);
-    element.click();
+  public downloadVersion(versionName: string, readme: string) {
+    let zip = new JSZip();
+    zip.file('README.txt', 'readme');
+    zip.generateAsync({ type: "blob" }).then((content) => {
+      FileSaver.saveAs(content, `${this.package.title} ${versionName}.zip`);
+    });
+    this.downloadService.addDownload(this.authenticationService.getUserFromLocalCache().id, this.package.id, versionName).subscribe(
+      (response: Download) => {
+        this.sendNotification(NotificationType.SUCCESS, `Downloaded succesfully`);
+      },
+      (errorResponse: HttpErrorResponse) => {
+        this.sendNotification(NotificationType.ERROR, errorResponse.error);
+      }
+    )
+
+    //hide the download button if the user has downloaded the version before; only available for new ones
   }
 
   private sendNotification(notificationType: NotificationType, message: string) {
