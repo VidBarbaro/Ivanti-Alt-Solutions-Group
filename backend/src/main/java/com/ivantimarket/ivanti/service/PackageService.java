@@ -105,28 +105,6 @@ public class PackageService {
         packageRepository.deleteById(id);
     }
 
-//    public boolean addPackageToDownloadedPackages(long userId, long packageId){
-//        User user = userService.findById(userId);
-//        Package mPackage = getPackage(packageId);
-//        if(user != null && mPackage != null){
-//
-//            user.getDownloaded_packages_id().add(packageId);
-//            userService.save(user);
-//            return true;
-//        }
-//        return false;
-//    }
-//    public boolean removePackageToDownloadedPackages(long userId, long packageId){
-//        User user = userService.findById(userId);
-//        if(user != null){
-//            if(user.getDownloaded_packages_id().remove(packageId)) {
-//                userService.save(user);
-//                return true;
-//            }
-//        }
-//        return false;
-//    }
-
     public boolean addPackageToFavouritePackages(long userId, long packageId){
         User user = userService.findById(userId);
         Package mPackage = getPackage(packageId);
