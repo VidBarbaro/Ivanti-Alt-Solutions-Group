@@ -7,6 +7,7 @@ export class Package {
     public title: String;
     public creator: Creator;
     public intro: String;
+    public description: String;
     public systemRequirements: SystemRequirements;
     public versions: PackageVersion[];
 

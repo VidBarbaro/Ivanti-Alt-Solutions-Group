@@ -143,3 +143,12 @@ body, div, form, input, label {
 
       tr:nth-child(even){background-color: #f2f2f2}
       
+.tableVersionContainer{
+  display: flex;
+}
+
+.addNewVersion{
+  height: 40px;
+  width: 40px;
+  margin: 0 3px 3px 3px;
+}

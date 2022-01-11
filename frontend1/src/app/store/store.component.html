@@ -11,15 +11,8 @@
         <mat-checkbox class="example-margin type-checkbox">Checkbox 6</mat-checkbox>
     </div>
     <div class="sort-by">
-        <p class="sort">Sort by</p>
-        <select class="sort-by-combobox">
-            <option class="sort-option">Price</option>
-            <option class="sort-option">Number of downloads</option>
-            <option class="sort-option">Option 3</option>
-            <option class="sort-option">Option 4</option>
-            <option class="sort-option">Option 5</option>
-        </select>
-        <button class="sort-button">Sort</button>
+        <p class="sort">Search</p>
+        <input name="searchTerm" #searchInput="ngModel" ngModel (ngModelChange)="searchPackages(searchInput.value)" type="search" placeholder="Search packages...">
     </div>
 </div>
 

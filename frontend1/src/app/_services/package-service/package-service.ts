@@ -46,10 +46,11 @@ export class PackageService {
         return null;
     }
 
-    public createPackageFormDataUpdate(id: number, title: string, intro: string, processorType: string, ram: string, graphicsCard: string): FormData {
+    public createPackageFormDataUpdate(id: number, title: string, description: string, intro: string, processorType: string, ram: string, graphicsCard: string): FormData {
         const formData = new FormData();
         formData.append('id', id.toString());
         formData.append('title', title);
+        formData.append('description', description);
         formData.append('intro', intro);
         formData.append('processorType', processorType);
         formData.append('ram', ram);
@@ -110,13 +111,14 @@ export class PackageService {
     //     return formdata;
     // }
 
-    public createNewPackage(title: string, intro: string, versionName: string, versionReadMe: string, processorType: string, ram: string, graphicsCard: string): Observable<Package> {
+    public createNewPackage(title: string, description:string, intro: string, versionName: string, versionReadMe: string, processorType: string, ram: string, graphicsCard: string): Observable<Package> {
         var myHeaders = new Headers();
         myHeaders.append("Authorization", `Bearer ${this.authService.loadToken()}`);
         myHeaders.append("Content-Type", "application/json");
 
         return this.http.post<any>(`${this.host}/api/packages/add-new-package`, {
             "title": title,
+            "description": description,
             "creator": {
                 "id": this.authService.getUserFromLocalCache().id,
                 "name": this.authService.getUserFromLocalCache().name,
@@ -133,10 +135,7 @@ export class PackageService {
     }
 
     public addVersionToPackage(idPackage: number, versionName: string, versionReadMe: string): Observable<Package> {
-        return this.http.post<any>(`${this.host}/api/packages/add-version/${idPackage}`, {
-            "name": versionName,
-            "readme": versionReadMe
-        });
+        return this.http.post<Package>(`${this.host}/api/packages/add-version/${idPackage}`, { "name": versionName, "readme": versionReadMe });
     }
 
     public getUploadedPackagesOfUser(idUser: number) {

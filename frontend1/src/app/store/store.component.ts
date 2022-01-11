@@ -49,6 +49,19 @@ export class StoreComponent implements OnInit {
     );
   }
 
+  public searchPackages(searchTerm: string): void {
+    const results: Package[] = [];
+    for (const aPackage of this.packages) {
+      if (aPackage.title.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1) {
+            results.push(aPackage);
+      }
+    }
+    this.packages = results;
+    if (results.length == 0 || !searchTerm) {
+      this.showPackages()
+    }
+  }
+
   ngOnDestroy(): void {
     this.subscriptions.forEach(sub => sub.unsubscribe());
   }

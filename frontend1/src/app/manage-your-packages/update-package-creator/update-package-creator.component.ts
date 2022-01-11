@@ -36,12 +36,25 @@ export class UpdatePackageCreatorComponent implements OnInit {
     )
   }
 
-  public onUpdatePackage(title: string, intro: string, processorType: string, ram: string, graphicsCard: string): void{
-    const formData = this.packageService.createPackageFormDataUpdate(this.currentPackage.id, title, intro, processorType, ram, graphicsCard);
+  public onUpdatePackage(title: string, description: string, intro: string, processorType: string, ram: string, graphicsCard: string): void{
+    const formData = this.packageService.createPackageFormDataUpdate(this.currentPackage.id, title, description, intro, processorType, ram, graphicsCard);
 
     this.packageService.updatePackage(formData).subscribe(
       (response: Package) => {
         this.sendNotification(NotificationType.SUCCESS, `Package: "${response.title}" updated successfully`)
+        this.message = "The package was successfully updated!";
+      },
+      (errorResponse: HttpErrorResponse) => {
+        this.sendNotification(NotificationType.ERROR, errorResponse.error.message);
+        this.message = "Please add an unique title.";
+      }
+    )
+  }
+
+  public onAddNewVersion(newVersionNameInput: string, newVersionReadmeInput: string){
+    this.packageService.addVersionToPackage(this.currentPackage.id, newVersionNameInput, newVersionReadmeInput).subscribe(
+      (response: Package) => {
+        this.sendNotification(NotificationType.SUCCESS, `Version updated successfully`)
         this.message = "The package was successfully updated!";
       },
       (errorResponse: HttpErrorResponse) => {

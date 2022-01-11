@@ -32,8 +32,8 @@ export class AddPackageComponent implements OnInit {
   //   event = null;
   // }
 
-  public onAddNewPackage(name: string, intro: string, versionName: string, versionReadMe: string, processorType: string, ram: string, graphicsCard: string): void {
-    this.packageService.createNewPackage(name, intro, versionName, versionReadMe, processorType, ram, graphicsCard).subscribe(
+  public onAddNewPackage(name: string, description: string, intro: string, versionName: string, versionReadMe: string, processorType: string, ram: string, graphicsCard: string): void {
+    this.packageService.createNewPackage(name, description, intro, versionName, versionReadMe, processorType, ram, graphicsCard).subscribe(
       (response: Package) => {
         this.packageService.addVersionToPackage(response.id, versionName, versionReadMe).subscribe(
           (resp: Package) => {
