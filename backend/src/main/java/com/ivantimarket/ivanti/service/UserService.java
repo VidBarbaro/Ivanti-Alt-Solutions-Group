@@ -6,11 +6,11 @@ import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.ivantimarket.ivanti.dto._mapper.UserMapperImpl;
+//import com.ivantimarket.ivanti.dto._mapper.UserMapperImpl;
 import com.ivantimarket.ivanti.dto.user.NewUserDTO;
 import com.ivantimarket.ivanti.dto.user.UserAuthDTO;
 import com.ivantimarket.ivanti.dto.user.UserDTO;
-//import com.ivantimarket.ivanti.dto._mapper.UserMapper;
+import com.ivantimarket.ivanti.dto._mapper.UserMapper;
 import com.ivantimarket.ivanti.exception.UnsatisfiedPasswordException;
 import com.ivantimarket.ivanti.exception.UserAlreadyExistsException;
 import com.ivantimarket.ivanti.model.Role;
@@ -47,7 +47,7 @@ public class UserService implements UserDetailsService {
     private final RoleRepository roleRepo;
     private final PasswordEncoder passwordEncoder;
     //    private final UserMapper userMapper;
-    private final UserMapperImpl userMapper;
+    private final UserMapper userMapper;
 
 
     public User getUser(long id) {
@@ -97,7 +97,7 @@ public class UserService implements UserDetailsService {
 
     public User incrementFirstTime(long id) {
         User user = userRepo.findById(id);
-        user.setFirstTime(1);
+        user.setFirstTime(false);
         userRepo.save(user);
         return user;
     }
@@ -141,6 +141,11 @@ public class UserService implements UserDetailsService {
         log.info("Adding  role {} to user {}", roleName, user.getUsername());
         Role role = roleRepo.findByName(roleName);
         user.addRole(role);
+        userRepo.save(user);
+    }
+
+    public void changeFirstTimeVar(User user) {
+        user.setFirstTime(false);
         userRepo.save(user);
     }
 

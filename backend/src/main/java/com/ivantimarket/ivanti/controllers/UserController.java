@@ -93,4 +93,11 @@ public class UserController {
         userService.addRoleToUser(user, roleName);
         return ResponseEntity.ok(user);
     }
+
+    @PostMapping("/user/changeFirstTimeVar")
+    public ResponseEntity<User> changeFirstTimeVar(@RequestBody long userId) {
+        User user = userService.getUser(userId);
+        userService.changeFirstTimeVar(user);
+        return ResponseEntity.ok(user);
+    }
 }

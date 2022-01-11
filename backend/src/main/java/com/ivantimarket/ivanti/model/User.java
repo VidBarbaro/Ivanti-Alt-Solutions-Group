@@ -28,7 +28,7 @@ public class User {
     private String username;
     private String password;
     private String email;
-    private int firstTime;
+    private boolean firstTime;
 
     @DBRef
     private Set<Role> roles = new HashSet<>();
@@ -42,7 +42,7 @@ public class User {
         this.username = username;
         this.password = password;
         this.email = email;
-        firstTime = 0;
+        this.firstTime = true;
     }
     public void addRole(Role role) {
         roles.add(role);
