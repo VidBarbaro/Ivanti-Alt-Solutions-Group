@@ -50,11 +50,11 @@ class UserTest {
         aPackage.setSystemRequirements(new SystemRequirements("Intem core i5","4gb","RX 560"));
         aPackage.setVersions(versions);
         //user
-        user = new User();
-        user.setName("John Doe");
-        user.setUsername("johnny");
-        user.setEmail("johnny@gmail.com");
-        user.setPassword("john123456");
+        user = new User(1,"John Doe","johnny","john123456", "johnny@gmail.com");
+//        user.setName("John Doe");
+//        user.setUsername("johnny");
+//        user.setEmail("johnny@gmail.com");
+//        user.setPassword("john123456");
         Set<Role> roles = new HashSet<>();
         roles.add(role);
         user.setRoles(roles);
@@ -104,16 +104,17 @@ class UserTest {
         Assertions.assertEquals(2, user.getRoles().size());
     }
 
-    @Test
-    void CustomersetDownloaded_packages_id() {
-        //arrange
-        Set<Long>packages = new HashSet<>();
-        //act
-        packages.add(aPackage.getId());
-        user.setDownloaded_packages_id(packages);
-        //assert
-        Assertions.assertEquals(1,user.getDownloaded_packages_id().size());
-    }
+//    @Test
+//    @Disabled
+//    void CustomersetDownloaded_packages_id() {
+//        //arrange
+//        Set<Long>packages = new HashSet<>();
+//        //act
+//        packages.add(aPackage.getId());
+//        user.setDownloaded_packages_id(packages);
+//        //assert
+//        Assertions.assertEquals(1,user.getDownloaded_packages_id().size());
+//    }
 
     @Test
     void NoContentCreatorSetUploaded_packages_id() {

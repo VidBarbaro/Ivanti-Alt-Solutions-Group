@@ -1,6 +1,6 @@
 package com.ivantimarket.ivanti.repository;
 
-import com.ivantimarket.ivanti.dto.packages.NewPackageDTO;
+import com.ivantimarket.ivanti.exception.TitleExistsException;
 import com.ivantimarket.ivanti.model.Package;
 import com.ivantimarket.ivanti.model.SystemRequirements;
 import com.ivantimarket.ivanti.model.Version;
@@ -42,19 +42,7 @@ public class PackageRepositoryTest {
         verify(packageRepository).findAll();
     }
     @Test
-    public void GetPackageById(){
-        //version I saw it can be with normal constructor
-//        version = new Version();
-//        LocalDateTime localDateTime = LocalDate.of(2020, Month.JANUARY, 18).atStartOfDay();
-//        version.setDateAdded(localDateTime);
-//        version.setUrl("urlrlrl");
-//        version.setName("first");
-//        version.setReadme("readme");
-//        version.setSize(1234);
-//        //system requirements
-//        systemRequirements = new SystemRequirements("Intem core i5","4gb","RX 560");
-//        //
-//        packageService.addNewPackage(new NewPackageDTO(1,"Title",1,"Cool intro"),version,systemRequirements);
+    public void GetPackageById(){;
         packageService.getPackage(1);
         verify(packageRepository).findById(1);
     }
@@ -63,5 +51,16 @@ public class PackageRepositoryTest {
         packageService.deletePackage(1);
         verify(packageRepository).deleteById(1);
     }
+    @Test
+    public void AddPackage() throws TitleExistsException {
+        Package mPackage = new Package();
+        packageService.addTestPackage(mPackage);
+        verify(packageRepository).save(mPackage);
+    }
+//    @Test
+//    public void UpdatePackage() throws TitleExistsException {
+//        packageService.updatePackage(1L,"sss","ppp","intel i5", "4GB", "RX 570");
+//        verify(packageRepository).save(packageRepository.findById(1L));
+//    }
 
 }

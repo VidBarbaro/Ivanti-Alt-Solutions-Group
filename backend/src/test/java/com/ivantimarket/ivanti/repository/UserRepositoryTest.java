@@ -1,6 +1,8 @@
 package com.ivantimarket.ivanti.repository;
 
+import com.ivantimarket.ivanti.dto._mapper.UserMapperImpl;
 import com.ivantimarket.ivanti.dto.user.NewUserDTO;
+import com.ivantimarket.ivanti.model.User;
 import com.ivantimarket.ivanti.repo.RoleRepository;
 import com.ivantimarket.ivanti.repo.UserRepository;
 import com.ivantimarket.ivanti.service.UserService;
@@ -19,6 +21,12 @@ import static org.mockito.Mockito.verify;
 public class UserRepositoryTest {
     @Mock
     private UserRepository userRepo;
+    @Mock
+    private RoleRepository roleRepo;
+    @Mock
+    private PasswordEncoder passwordEncoder;
+    @Mock
+    private UserMapperImpl userMapper;
 
     private AutoCloseable autoCloseable;
     @InjectMocks
@@ -27,9 +35,7 @@ public class UserRepositoryTest {
     @BeforeEach
     void setUp() {
         autoCloseable = MockitoAnnotations.openMocks(this);
-//        userService.saveUser(new NewUserDTO(1,"Pete","pete","123456789",
-//                "pete@gmail.com","ROLE_CUSTOMER"));
-//        this.userService = new UserService
+        userService = new UserService(userRepo,roleRepo,passwordEncoder,userMapper);
     }
     @AfterEach
     void tearDown() throws Exception {
@@ -37,19 +43,27 @@ public class UserRepositoryTest {
     }
 //    not implemented get all users
     @Test
-    @Disabled
     void getUserList() {
         userService.getUserDTOs();
         verify(userRepo).findAll();
 
     }
-
     @Test
-    @Disabled
     void getUserByUsername() {
-        userService.loadUserByUsername("pete");
+        userService.getUserDTO("pete");
         verify(userRepo).findByUsername("pete");
     }
+
+    // the when setting the password the user is being null
+    @Test
+    @Disabled
+    void SaveNewUser() {
+        NewUserDTO newUserDTO = new NewUserDTO(1,"John Doe","johnny","john123456", "johnny@gmail.com","ROLE_CUSTOMER");
+        userService.saveUser(newUserDTO);
+        User user = userMapper.toUser(newUserDTO);
+        verify(userRepo).save(user);
+    }
+
     @Test
     void getUserById() {
         userService.getUser(1);
