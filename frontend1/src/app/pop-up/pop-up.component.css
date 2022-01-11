@@ -1,0 +1,21 @@
+h1 {
+    text-align: center;
+}
+
+h3 {
+    text-align: justify;
+}
+
+img {
+    margin-bottom: 2%;
+}
+
+.back {
+    color: primary;
+    float: left;
+}
+
+.next {
+    color: primary;
+    float: right;
+}

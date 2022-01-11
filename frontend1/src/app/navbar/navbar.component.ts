@@ -4,7 +4,6 @@ import { NotificationType } from '../auth/enum/notification-type.enum';
 import { AuthenticationService } from '../auth/service/authentication.service';
 import { NotificationService } from '../auth/service/notification.service';
 import { User } from '../model/user';
-import { ModalService } from '../_modal';
 
 @Component({
   selector: 'app-navbar',
@@ -13,13 +12,13 @@ import { ModalService } from '../_modal';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor(private notificationService: NotificationService, private router: Router, private authService: AuthenticationService, private modalService: ModalService) {
+  constructor(private notificationService: NotificationService, private router: Router, private authService: AuthenticationService) {
   }
 
   loggedIn: boolean = false;
   contentCreator: boolean = false;
   //isUserIncremented: boolean;
-  user : User;
+  user: User;
 
 
   ngOnInit(): void {
@@ -40,10 +39,10 @@ export class NavbarComponent implements OnInit {
     else { this.showMenu = true }
   }
 
-  logOut(){
-      this.authService.logOut();
-      this.router.navigate(['/login']);
-      this.sendNotification(NotificationType.SUCCESS, 'You have been logged out successfully');
+  logOut() {
+    this.authService.logOut();
+    this.router.navigate(['/login']);
+    this.sendNotification(NotificationType.SUCCESS, 'You have been logged out successfully');
   }
 
   private sendNotification(notificationType: NotificationType, message: string): void {
@@ -54,20 +53,11 @@ export class NavbarComponent implements OnInit {
     }
   }
 
-  openModal(id: string) {
-    this.modalService.open(id);
-  }
-
-  closeModal(id: string) {
-     this.modalService.close(id);
-     
-  } 
-
-  isFirstTime(): boolean{
-    if (this.user.firstTime == 0){
+  isFirstTime(): boolean {
+    if (this.user.firstTime == true) {
       return true;
     }
-    else{
+    else {
       return false;
     }
   }

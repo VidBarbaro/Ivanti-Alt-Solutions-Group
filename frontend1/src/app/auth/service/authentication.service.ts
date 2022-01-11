@@ -67,6 +67,9 @@ export class AuthenticationService {
     // localStorage.removeItem('users');
   }
 
+  public removeUserFromLocalCache(): void{
+    localStorage.removeItem('user');
+  }
 
   public addUserToLocalCache(user?: User): void {
     localStorage.setItem('user', JSON.stringify(user));

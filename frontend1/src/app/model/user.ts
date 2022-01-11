@@ -10,7 +10,7 @@ export class User {
     public roles: Role[];
     public token: string;
     public favourite_packages_id: number[];
-    public firstTime: number;
+    public firstTime: boolean;
 
     constructor() {
         this.name = '';

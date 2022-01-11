@@ -4,13 +4,21 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIcon, MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatStepperModule } from '@angular/material/stepper';
+import { FormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 const MaterialComponents = [
   MatButtonModule,
   MatToolbarModule,
   MatIconModule,
   MatCardModule,
-  MatCheckboxModule
+  MatCheckboxModule,
+  MatDialogModule,
+  MatStepperModule,
+  FormsModule,
+  MatFormFieldModule
 ]
 
 @NgModule({

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { ReactiveFormsModule} from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -37,8 +37,8 @@ import { UploadedPackagesComponent } from './manage-your-packages/uploaded-packa
 import { UploadedPackageDetailsComponent } from './manage-your-packages/uploaded-package-details/uploaded-package-details.component';
 import { UpdatePackageCreatorComponent } from './manage-your-packages/update-package-creator/update-package-creator.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { ModalModule } from './_modal';
 import { NextDirective } from './directives/next.directive';
+import { PopUpComponent } from './pop-up/pop-up.component';
 
 
 
@@ -68,18 +68,18 @@ import { NextDirective } from './directives/next.directive';
     UploadedPackageDetailsComponent,
     UpdatePackageCreatorComponent,
     NextDirective,
+    PopUpComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
-    HttpClientModule, 
+    HttpClientModule,
     NotificationModule,
     FormsModule,
     ReactiveFormsModule,
     NgbModule,
-    ModalModule
   ],
   providers: [NotificationService, AuthenticationGuard, AuthenticationService, UserService, { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
   bootstrap: [AppComponent],
