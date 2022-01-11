@@ -87,13 +87,14 @@ public class PackageController {
 
     @PostMapping("/update-package")
     public ResponseEntity<Package> updatePackage(@RequestParam("id") Long id,
-                                           @RequestParam("title") String title,
-                                           @RequestParam("intro") String intro,
-                                           @RequestParam("processorType") String processorType,
-                                           @RequestParam("ram") String ram,
-                                           @RequestParam("graphicsCard") String graphicsCard) throws TitleExistsException {
+                                                 @RequestParam("title") String title,
+                                                 @RequestParam("description") String description,
+                                                 @RequestParam("intro") String intro,
+                                                 @RequestParam("processorType") String processorType,
+                                                 @RequestParam("ram") String ram,
+                                                 @RequestParam("graphicsCard") String graphicsCard) throws TitleExistsException {
         //add exception for unique title
-        Package updatedPackage = packageService.updatePackage(id, title, intro, processorType, ram, graphicsCard);
+        Package updatedPackage = packageService.updatePackage(id, title, description, intro, processorType, ram, graphicsCard);
 
         return new ResponseEntity<>(updatedPackage, OK);
     }

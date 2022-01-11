@@ -71,11 +71,9 @@ public class PackageService {
     }
 
     public Package addTestPackage(Package newPackage) throws TitleExistsException {
-        if(!this.testTitleUnique(newPackage.getTitle())){throw new TitleExistsException("Title already exists. Add an unique one.");}
-        else{
-            packageRepository.save(newPackage);
-            return newPackage;
-        }
+        this.testTitleUnique("", newPackage.getTitle());
+        packageRepository.save(newPackage);
+        return newPackage;
     }
 
     public List<Package> getPackagesUploadedByUser(long userId)
@@ -90,16 +88,16 @@ public class PackageService {
         }
         return packages;
     }
-    public Package updatePackage(Long id, String title, String intro, String processorType, String ram, String graphicsCard) throws TitleExistsException {
-        if(!this.testTitleUnique(title)){throw new TitleExistsException("Title already exists. Add an unique one.");}
-        else{
-            Package updatedPackage = this.getPackage(id);
-            updatedPackage.setTitle(title);
-            updatedPackage.setIntro(intro);
-            updatedPackage.setSystemRequirements(new SystemRequirements(processorType, ram, graphicsCard));
-            packageRepository.save(updatedPackage);
-            return updatedPackage;
-        }
+    public Package updatePackage(Long id, String title, String description, String intro, String processorType, String ram, String graphicsCard) throws TitleExistsException {
+        String currentTitle = this.packageRepository.findById(id).getTitle();
+        this.testTitleUnique(currentTitle, title);
+        Package updatedPackage = this.getPackage(id);
+        updatedPackage.setTitle(title);
+        updatedPackage.setDescription(description);
+        updatedPackage.setIntro(intro);
+        updatedPackage.setSystemRequirements(new SystemRequirements(processorType, ram, graphicsCard));
+        packageRepository.save(updatedPackage);
+        return updatedPackage;
     }
 
 
@@ -164,14 +162,31 @@ public class PackageService {
         return false;
     }
 
-    private boolean testTitleUnique(String title) throws TitleExistsException {
+    public PackageOverviewDTO findPackageByTitle(String title){
         for (PackageOverviewDTO p:
                 this.getAllPackages()) {
             if(p.getTitle().equals(title)){
-                return false;
+                return p;
             }
         }
-        return true;
+        return null;
+    }
+
+    private PackageOverviewDTO testTitleUnique(String currentTitle, String title) throws TitleExistsException {
+        PackageOverviewDTO packageByTitle = findPackageByTitle(title);
+
+        if(!currentTitle.equals("")) {
+            PackageOverviewDTO currentPackage = findPackageByTitle(currentTitle);
+            if(packageByTitle != null && currentPackage.getId() != packageByTitle.getId()) {
+                throw new TitleExistsException("Title already exists. Add an unique one.");
+            }
+            return currentPackage;
+        } else {
+            if(packageByTitle != null) {
+                throw new TitleExistsException("Title already exists. Add an unique one.");
+            }
+            return null;
+        }
     }
 
 }
