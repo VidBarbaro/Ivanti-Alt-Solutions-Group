@@ -1,5 +1,7 @@
 package com.ivantimarket.ivanti.service;
 
+import com.ivantimarket.ivanti.dto._mapper.UserMapper;
+import com.ivantimarket.ivanti.dto._mapper.UserMapperImpl;
 import com.ivantimarket.ivanti.dto.user.NewUserDTO;
 import com.ivantimarket.ivanti.dto.user.UserDTO;
 import com.ivantimarket.ivanti.model.User;
@@ -23,16 +25,18 @@ import static org.junit.jupiter.api.Assertions.*;
 class UserServiceTest {
     @MockBean
     private UserRepository userRepo;
-//    @MockBean
-//    private RoleRepository roleRepo;
-//    @MockBean
-//    private BCryptPasswordEncoder passwordEncoder;
-    @InjectMocks
+    @MockBean
+    private RoleRepository roleRepo;
+    @MockBean
+    private BCryptPasswordEncoder passwordEncoder;
+    @MockBean
+    private UserMapperImpl userMapper;
     private UserService userService;
 
     @BeforeEach
     void setUp() {
 //        passwordEncoder = new BCryptPasswordEncoder();
+        userService = new UserService(userRepo,roleRepo, passwordEncoder, userMapper);
         userService.saveUser(new NewUserDTO(1,"Pete","pete","123456789",
                 "pete@gmail.com","ROLE_CUSTOMER"));
     }

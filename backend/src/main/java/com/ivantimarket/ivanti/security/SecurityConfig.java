@@ -40,7 +40,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.authorizeRequests().antMatchers("/api/login/**","/api/register/**", "/api/token/refresh/**", "/api/users/**", "/api/packages/get/**", "/api/packages","/api/packages/download**","/user/login/**", "/api/packages/create",
                 "/api/packages/add-new-package", "/api/packages/add-version/{packageId}", "/api/packages/uploaded/{userId}", "/api/packages/versions/{packageId}", "/api/packages/system-requirements/{packageId}",
-                "/api/user/add-role", "/api/review/create", "/api/reviews/package/{packageId}").permitAll();
+                "/api/user/add-role", "/api/review/create", "/api/reviews/package/{packageId}", "/api/download/create",
+                "/api/downloads/{userId}", "/downloads/wasVersionDownloadedBefore").permitAll();
 
         http.authorizeRequests().antMatchers("/api/login/**","/api/register/**", "/api/token/refresh/**", "/api/users/**", "/api/packages/get/**", "/api/packages/","/api/packages/download**","/user/login/**", "/api/packages/create",
                 "/api/packages/add-new-package", "/api/packages/add-version/{packageId}", "/api/packages/uploaded/{userId}", "/api/packages/versions/{packageId}", "/api/packages/system-requirements/{packageId}", "/api/packages/update-package",
