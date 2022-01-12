@@ -46,23 +46,31 @@
   
   .buttonHomeFeature{
     width: fit-content;
-    padding: 10px 20px;
+    /* padding-top: 3px;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 3px; */
+    padding: 5px 10px;
     -webkit-box-shadow: 0px 0px 11px 1px rgba(92,92,92,0.17);
     box-shadow: 0px 0px 11px 1px rgba(92,92,92,0.17);
     transition: 0.5s;
-  }
-  
-  .buttonHomeFeature a{
     color: red;
     text-decoration: none;
     font-size: 17px;
+    border: none;
   }
+  
+  /* .buttonHomeFeature h2{
+    color: red;
+    text-decoration: none;
+    font-size: 17px;
+  } */
   
   .buttonHomeFeature:hover{
     background-color: #663399;
   }
   
-  .buttonHomeFeature:hover a{
+  .buttonHomeFeature:hover{
     color: white;
   }
   
