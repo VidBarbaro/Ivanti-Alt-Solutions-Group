@@ -97,3 +97,13 @@
   flex-direction: row;
   flex-wrap: wrap;
 }
+
+.sortContainer{
+  display: flex;
+  margin: 2px 20px;
+  margin: auto;
+}
+
+.sortInput{
+  width: 300px;
+}
