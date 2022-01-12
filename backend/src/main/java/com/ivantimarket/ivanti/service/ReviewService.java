@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,6 +19,7 @@ import java.util.List;
 public class ReviewService {
 
     private final ReviewRepository reviewRepository;
+    private static final DecimalFormat df = new DecimalFormat("0.00");
 
     public Review getReviewById(long id) {
         return reviewRepository.findById(id);
@@ -70,8 +72,8 @@ public class ReviewService {
     public double calculateAverageRatingOfPackage(long packageId)
     {
         List<Review> reviews = this.getReviewsByPackageId(packageId);
-        int sumOfRatings = 0;
-        int nrRatings = reviews.size();
+        double sumOfRatings = 0;
+        double nrRatings = reviews.size();
         if(nrRatings == 0)
         {
             return 0;
@@ -83,7 +85,7 @@ public class ReviewService {
                 sumOfRatings += r.getRating();
             }
         }
-        return (sumOfRatings / nrRatings);
+        return round((sumOfRatings / nrRatings), 2);
     }
 
     public int getNrReviewsOfPackageByRating(int rating, long packageId)
@@ -97,5 +99,14 @@ public class ReviewService {
             }
         }
         return nrReviews;
+    }
+
+    private static double round(double value, int places)
+    {
+        if (places < 0) throw new IllegalArgumentException();
+        long factor = (long) Math.pow(10, places);
+        value = value * factor;
+        long tmp = Math.round(value);
+        return (double) tmp / factor;
     }
 }
