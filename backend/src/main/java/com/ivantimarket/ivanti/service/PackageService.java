@@ -100,6 +100,21 @@ public class PackageService {
         return updatedPackage;
     }
 
+    public List<PackageOverviewDTO> getFirst3Packages() {
+        List<Package> packages = packageRepository.findAll();
+        List<PackageOverviewDTO> dtos = new ArrayList<>();
+        for(int i = 0; i < 3; i++){
+            Package p = packages.get(i);
+            PackageOverviewDTO dto = packageMapper.toPackageOverviewDTO(p);
+            List<Version> versions = p.getVersions();
+            Version latestVersion = versions.get(versions.size() - 1);
+            dto.setLatestVersion(latestVersion);
+            dtos.add(dto);
+        }
+
+        return dtos;
+    }
+
 
     public void deletePackage(int id) {
         packageRepository.deleteById(id);

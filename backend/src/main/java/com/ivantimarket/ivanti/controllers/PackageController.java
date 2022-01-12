@@ -115,6 +115,12 @@ public class PackageController {
 //        return packageService.addVersion(packageId, version);
 //    }
 
+    @RequestMapping(value = "/first3packages", method = RequestMethod.GET)
+    public List<PackageOverviewDTO> getFirst3Packages() {
+        LOG.info("Getting first 3 packages.");
+        return packageService.getFirst3Packages();
+    }
+
     private SystemRequirements getSystemRequirements(String util){
         SystemRequirements utilJson = new SystemRequirements();
 
