@@ -35,6 +35,16 @@ export class PackageService {
         return this.http.get<Package>(`${this.host}/api/packages/get/${packageId}`);
     }
 
+    public getFavouritePackagesOfUser(userId: number): Observable<Package[]>
+    {
+        return this.http.get<Package[]>(`${this.host}/api/packages/favouriteOfUser/${userId}`);
+    }
+
+    public getDownloadedPackagesOfUser(userId: number): Observable<Package[]>
+    {
+        return this.http.get<Package[]>(`${this.host}/api/packages/downloaded/${userId}`);
+    }
+
     // public addPackageToLocalCache(selectedPackage: Package): void {
     //     localStorage.setItem('package', JSON.stringify(selectedPackage));
     // }

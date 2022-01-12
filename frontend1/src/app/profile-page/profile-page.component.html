@@ -57,12 +57,9 @@
     <h1>Downloaded Packages</h1>
 
     <div class="wrapper-packages">
-        <app-package></app-package>
-        <app-package></app-package>
-        <app-package></app-package>
-        <app-package></app-package>
-        <app-package></app-package>
-        <app-package></app-package>
+        <li *ngFor="let p of downloadedPackages">
+            <app-package [id]="p.id" [title]="p.title" [intro]="p.intro"></app-package>
+        </li>
     </div>
 
     <h1>Saved Packages</h1>
@@ -71,11 +68,5 @@
         <li *ngFor="let p of favouritePackages">
             <app-package [id]="p.id" [title]="p.title" [intro]="p.intro"></app-package>
         </li>
-        <!-- <app-package></app-package>
-        <app-package></app-package>
-        <app-package></app-package>
-        <app-package></app-package>
-        <app-package></app-package>
-        <app-package></app-package> -->
     </div>
 </div>

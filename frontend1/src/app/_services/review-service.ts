@@ -21,6 +21,20 @@ export class ReviewService {
         return this.http.get<Review[]>(`${this.host}/api/reviews/package/${packageId}`, { observe: 'response' });
     }
 
+    public getAverageRatingOfPackage(packageId: number) {
+        return this.http.get<number>(`${this.host}/api/reviews/packageAverageRating/${packageId}`, { observe: 'response' });
+    }
+
+    public getNrReviewsOfPackageRating(packageId: number, rating: number) {
+        return this.http.get<number>(`${this.host}/api/reviews/nrReviewsWithRating/${packageId}/${rating}`, { observe: 'response' });
+    }
+
+    public createGetNrReviewsFormData(rating: number): FormData {
+        const formData = new FormData();
+        formData.append('rating', rating.toString());
+        return formData;
+    }
+
     public addReviewToPackage(userId: number, packageId: number, rating: number): Observable<Review> {
         return this.http.post<any>(`${this.host}/api/review/create`, {
             "userId": userId,

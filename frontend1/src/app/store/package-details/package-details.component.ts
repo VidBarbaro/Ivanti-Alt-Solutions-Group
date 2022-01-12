@@ -31,7 +31,17 @@ export class PackageDetailsComponent implements OnInit {
   submitReviewMessage: string = null;
   packageReviews: Review[];
   nrReviews: number;
-  downloadedVersionsFromPackage: Download[];
+  averageRating: number;
+  nrReviews1: number;
+  nrReviews2: number;
+  nrReviews3: number;
+  nrReviews4: number;
+  nrReviews5: number;
+  barLengh1: number;
+  barLengh2: number;
+  barLengh3: number;
+  barLengh4: number;
+  barLengh5: number;
 
   constructor(
     private packageService: PackageService,
@@ -47,6 +57,8 @@ export class PackageDetailsComponent implements OnInit {
     console.log(this.router.snapshot.params);
     this.getPackage();
     this.getReviewsOfPackage();
+    this.getAverageRating();
+
   }
 
 
@@ -71,15 +83,50 @@ export class PackageDetailsComponent implements OnInit {
     )
   }
 
-  public getDownloadsOfVersionFromUser(): void {
-    this.reviewService.getReviewsOfPackage(this.router.snapshot.params.id).subscribe(
-      (response: HttpResponse<Review[]>) => {
-        this.packageReviews = response.body;
-        this.nrReviews = this.packageReviews.length;
-        console.log(response);
-
+  public getAverageRating(): void {
+    this.reviewService.getAverageRatingOfPackage(this.router.snapshot.params.id).subscribe(
+      (response: HttpResponse<number>) => {
+        this.averageRating = response.body;
+        this.nrReviews1 = this.getNrReviewsOfRating(1);
+        this.nrReviews2 = this.getNrReviewsOfRating(2);
+        this.nrReviews3 = this.getNrReviewsOfRating(3);
+        this.nrReviews4 = this.getNrReviewsOfRating(4);
+        this.nrReviews5 = this.getNrReviewsOfRating(5);
       }
     )
+  }
+
+  public getNrReviewsOfRating(rating: number): number {
+    this.reviewService.getNrReviewsOfPackageRating(this.package.id, rating).subscribe(
+      (response: HttpResponse<number>) => {
+        if (rating == 1) {
+          this.nrReviews1 = response.body
+          this.barLengh1 = this.calculateReviewBarLenght(this.nrReviews1);
+        }
+        if (rating == 2) {
+          this.nrReviews2 = response.body
+          this.barLengh2 = this.calculateReviewBarLenght(this.nrReviews2);
+        }
+        if (rating == 3) {
+          this.nrReviews3 = response.body
+          this.barLengh3 = this.calculateReviewBarLenght(this.nrReviews3);
+        }
+        if (rating == 4) {
+          this.nrReviews4 = response.body
+          this.barLengh4 = this.calculateReviewBarLenght(this.nrReviews4);
+        }
+        if (rating == 5) {
+          this.nrReviews5 = response.body
+          this.barLengh5 = this.calculateReviewBarLenght(this.nrReviews5);
+        }
+        return response.body;
+      },
+      (errorResponse: HttpErrorResponse) => {
+        this.sendNotification(NotificationType.ERROR, errorResponse.error.message);
+        this.message = "An error occured while processing the request. Please try again.";
+      }
+    )
+    return null;
   }
 
 
@@ -96,20 +143,6 @@ export class PackageDetailsComponent implements OnInit {
       (errorResponse: HttpErrorResponse) => {
         this.isPackageFavourite = false;
         console.log(this.isPackageFavourite);
-      }
-    )
-  }
-
-  public wasVersionDownloadedBefore(userId: number, packageId: number, versionName: string): any {
-    const formData = this.downloadService.createWasVersionDownloadedBefore(userId, packageId, versionName);
-    this.downloadService.wasVersionDownloadedBefore(formData).subscribe(
-      (response: boolean) => {
-        this.sendNotification(NotificationType.SUCCESS, "")
-        return response;
-      },
-      (errorResponse: HttpErrorResponse) => {
-        this.sendNotification(NotificationType.ERROR, errorResponse.error.message);
-        return null;
       }
     )
   }
@@ -160,7 +193,7 @@ export class PackageDetailsComponent implements OnInit {
   showOverview() {
     let packageInfo = document.getElementById("package-info-description")
     if (packageInfo !== null) {
-      packageInfo.innerHTML = "Overview: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nullapariatur.Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim idest laborum.";
+      packageInfo.innerHTML = this.package.description;
     }
     let title = document.getElementById("package-info-title");
     if (title !== null) {
@@ -206,7 +239,15 @@ export class PackageDetailsComponent implements OnInit {
       }
     )
 
-    //hide the download button if the user has downloaded the version before; only available for new ones
+  }
+
+  private calculateReviewBarLenght(reviews: number) {
+    if(this.nrReviews !== 0)
+    {
+      let value = 100 / this.nrReviews;
+      return ((value * reviews));
+    }
+    return 0;
   }
 
   private sendNotification(notificationType: NotificationType, message: string) {

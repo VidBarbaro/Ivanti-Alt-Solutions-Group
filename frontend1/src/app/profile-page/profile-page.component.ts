@@ -4,7 +4,7 @@ import { AuthenticationService } from '../auth/service/authentication.service';
 import { UserService } from '../auth/service/user.service';
 import { NotificationType } from '../auth/enum/notification-type.enum';
 import { NotificationService } from '../auth/service/notification.service';
-import { HttpErrorResponse } from '@angular/common/http';
+import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Package } from '../model/package';
 import { PackageService } from '../_services/package-service/package-service';
 
@@ -19,6 +19,7 @@ export class ProfilePageComponent implements OnInit {
   public isContentCreator: boolean;
   public contentCreatorToShow: string;
   public favouritePackages: Package[];
+  public downloadedPackages: Package[];
 
   constructor(private authenticationService: AuthenticationService, private userService: UserService, private notificationService: NotificationService,
     private packageService: PackageService) {
@@ -31,26 +32,40 @@ export class ProfilePageComponent implements OnInit {
     else {
       this.contentCreatorToShow = "No";
     }
+
     this.getFavouritePackages();
+    this.getDownloadedPackages();
+
 
   }
 
   public getFavouritePackages(): void {
-    for (const p of this.loggedInUser.favourite_packages_id) {
-      this.getPackage(p);
-    }
+    this.packageService.getFavouritePackagesOfUser(this.loggedInUser.id).subscribe(
+      (response: Package[]) => {
+        this.favouritePackages = response;
+      },
+      (errorResponse: HttpErrorResponse) => {
+        console.log(errorResponse.message);
+
+      }
+    )
   }
 
-  public getPackage(idPackage: number): void {
-    this.packageService.getPackageById(idPackage).subscribe(
-      (response: Package) => {
-        this.favouritePackages.push(response)
+  public getDownloadedPackages(): void {
+    this.packageService.getDownloadedPackagesOfUser(this.loggedInUser.id).subscribe(
+      (response: Package[]) => {
+        this.downloadedPackages = response;
+      },
+      (errorResponse: HttpErrorResponse) => {
+        console.log(errorResponse.message);
+
       }
     )
   }
 
   ngOnInit(): void {
-    // this.getFavouritePackages();
+    this.getFavouritePackages();
+    console.log(this.loggedInUser.favourite_packages_id);
   }
 
 
