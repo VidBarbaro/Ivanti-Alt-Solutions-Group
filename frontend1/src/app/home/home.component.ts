@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { AuthenticationService } from '../auth/service/authentication.service';
@@ -45,6 +46,7 @@ export class HomeComponent implements OnInit {
     this.userService.changeFirstTimeVar(this.authService.getUserFromLocalCache().id).subscribe( // we get user from the back-end
       (response: User) => {
         this.user = response;
+
         console.log(this.user);
         
         //change in local storage with the new user
@@ -52,6 +54,7 @@ export class HomeComponent implements OnInit {
         this.authService.addUserToLocalCache(this.user);
       }
     )
+
   }
 
 }

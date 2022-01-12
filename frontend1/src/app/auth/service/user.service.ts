@@ -52,7 +52,6 @@ export class UserService {
     return this.http.post<User>(`${this.host}/api/user/add-role`, formData);
   }
 
-
   public deleteUser(userId: number): Observable<CustomHttpResponse | HttpErrorResponse> {
     return this.http.delete<CustomHttpResponse>(`${this.host}/user/delete/${userId}`);
   }
@@ -102,7 +101,12 @@ export class UserService {
     formData.append('userId', userId.toString());
     formData.append('roleName', roleName);
     return formData;
+  }
 
+  public createChangeFirstTime(userId: number) {
+    const formData = new FormData();
+    formData.append('userId', userId.toString());
+    return formData;
   }
 
 }

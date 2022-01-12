@@ -191,7 +191,7 @@ export class PackageDetailsComponent implements OnInit {
     }
   }
 
-  public downloadVersion(versionName: string, readme: string): any {
+  public downloadVersion(versionName: string, readme: string) {
     let zip = new JSZip();
     zip.file('README.txt', 'readme');
     zip.generateAsync({ type: "blob" }).then((content) => {
