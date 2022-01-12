@@ -68,4 +68,14 @@ public class ReviewController {
         LOG.info("Updating rating of package with ID : {} to : {}",id,rating);
         return ResponseEntity.ok().body(reviewService.updateReview(id,rating));
     }
+
+    @GetMapping("/reviews/packageAverageRating/{packageId}")
+    public double getAverageRatingOfPackage(@PathVariable("packageId")int packageId) {
+        return reviewService.calculateAverageRatingOfPackage(packageId);
+    }
+
+    @GetMapping("/reviews/nrReviewsWithRating/{packageId}/{rating}")
+    public int getNrReviewsOfPackageRating(@PathVariable("packageId")int packageId, @PathVariable("rating") int rating) {
+        return reviewService.getNrReviewsOfPackageByRating(rating, packageId);
+    }
 }

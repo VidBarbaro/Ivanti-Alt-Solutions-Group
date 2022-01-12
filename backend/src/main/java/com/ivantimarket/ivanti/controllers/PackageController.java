@@ -218,6 +218,18 @@ public class PackageController {
         return packageService.addVersion(packageId, newVersion);
     }
 
+    @GetMapping("/favouriteOfUser/{userId}")
+    public List<Package> getFavouritePackagesOfUser(@PathVariable long userId)
+    {
+        return packageService.getFavouritePackagesOfUser(userId);
+    }
+
+    @GetMapping("/downloaded/{userId}")
+    public List<Package> getDownloadedPackagesOfUser(@PathVariable long userId)
+    {
+        return packageService.getDownloadedPackagesByUser(userId);
+    }
+
     @GetMapping("/download")
     @ResponseBody
     public ResponseEntity<Resource> getFile(@RequestParam String filename) {

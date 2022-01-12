@@ -6,10 +6,9 @@ import com.ivantimarket.ivanti.dto._mapper.UserMapper;
 import com.ivantimarket.ivanti.dto.packages.NewPackageDTO;
 import com.ivantimarket.ivanti.dto.packages.PackageOverviewDTO;
 import com.ivantimarket.ivanti.exception.TitleExistsException;
+import com.ivantimarket.ivanti.model.*;
 import com.ivantimarket.ivanti.model.Package;
-import com.ivantimarket.ivanti.model.SystemRequirements;
-import com.ivantimarket.ivanti.model.User;
-import com.ivantimarket.ivanti.model.Version;
+import com.ivantimarket.ivanti.repo.DownloadRepository;
 import com.ivantimarket.ivanti.repo.PackageRepository;
 import com.ivantimarket.ivanti.repo.UserRepository;
 import lombok.AllArgsConstructor;
@@ -28,6 +27,7 @@ public class PackageService {
     private final PackageRepository packageRepository;
     private final PackageMapper packageMapper;
     private final UserRepository userService;
+    private final DownloadRepository downloadRepository;
     private final UserMapper userMapper;
 
     public List<PackageOverviewDTO> getAllPackages() {
@@ -148,6 +148,32 @@ public class PackageService {
             }
         }
         return null;
+    }
+
+    public List<Package> getFavouritePackagesOfUser(long userId)
+    {
+        List<Package> favouritePackages = new ArrayList<>();
+        User user = this.userService.findById(userId);
+        for(Long id : user.getFavourite_packages_id())
+        {
+            Package p = this.packageRepository.findById(id);
+            favouritePackages.add(p);
+        }
+        return favouritePackages;
+    }
+
+    public List<Package> getDownloadedPackagesByUser(long userId)
+    {
+        List<Package> downloaded = new ArrayList<>();
+        for(Download d : this.downloadRepository.findAll())
+        {
+            if(d.getUserId() == userId)
+            {
+                Package p = this.packageRepository.findById(d.getPackageId());
+                downloaded.add(p);
+            }
+        }
+        return downloaded;
     }
 
     private PackageOverviewDTO testTitleUnique(String currentTitle, String title) throws TitleExistsException {

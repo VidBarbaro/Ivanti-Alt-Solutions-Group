@@ -66,4 +66,36 @@ public class ReviewService {
         }
         return null;
     }
+
+    public double calculateAverageRatingOfPackage(long packageId)
+    {
+        List<Review> reviews = this.getReviewsByPackageId(packageId);
+        int sumOfRatings = 0;
+        int nrRatings = reviews.size();
+        if(nrRatings == 0)
+        {
+            return 0;
+        }
+        else
+        {
+            for(Review r : reviews)
+            {
+                sumOfRatings += r.getRating();
+            }
+        }
+        return (sumOfRatings / nrRatings);
+    }
+
+    public int getNrReviewsOfPackageByRating(int rating, long packageId)
+    {
+        int nrReviews = 0;
+        for(Review r : this.getReviewsByPackageId(packageId))
+        {
+            if(r.getRating() == rating)
+            {
+                nrReviews++;
+            }
+        }
+        return nrReviews;
+    }
 }
