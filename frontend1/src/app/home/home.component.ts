@@ -1,6 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { AuthenticationService } from '../auth/service/authentication.service';
 import { UserService } from '../auth/service/user.service';
 import { User } from '../model/user';
@@ -13,14 +14,16 @@ import { PopUpComponent } from '../pop-up/pop-up.component';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private authService: AuthenticationService, public dialogRef: MatDialog, private userService: UserService) { }
+  constructor(private authService: AuthenticationService, public dialogRef: MatDialog, private userService: UserService, private router: Router) { }
 
   user: User;
 
   ngOnInit(): void {
     this.user = this.authService.getUserFromLocalCache();
-    if (this.checkIfUserIsNew() == true) {
-      this.openTutorial();
+    if(this.user != null) {
+      if (this.checkIfUserIsNew() == true) {
+        this.openTutorial();
+      }
     }
   }
 

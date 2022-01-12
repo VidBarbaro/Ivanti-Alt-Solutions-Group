@@ -80,9 +80,7 @@ export class AuthenticationService {
   }
 
   public getUserFromLocalCache(): User {
-    const userJson = localStorage.getItem('user');
-    this.currentUser = userJson !== null ? JSON.parse(userJson) : new User();
-    return this.currentUser;
+    return JSON.parse(localStorage.getItem('user'));
   }
 
   public loadToken(): string {

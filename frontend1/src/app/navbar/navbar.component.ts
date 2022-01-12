@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { NotificationType } from '../auth/enum/notification-type.enum';
 import { AuthenticationService } from '../auth/service/authentication.service';
 import { NotificationService } from '../auth/service/notification.service';
+import { Role } from '../model/role';
 import { User } from '../model/user';
 
 @Component({
@@ -60,6 +61,52 @@ export class NavbarComponent implements OnInit {
     else {
       return false;
     }
+  }
+
+  public get isCustomer(): boolean {
+    if (this.getUserRole() != null) {
+      return this.getUserRole() === "ROLE_CUSTOMER";
+    }
+    return false;
+  }
+
+  public get isContentCreator(): boolean {
+    if (this.getUserRole() != null) {
+      if(this.getUserRole() === "ROLE_CONTENT_CREATOR") {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  public get isNone(): boolean {
+    if (this.getUserRole() != null) {
+      return false;
+    }
+    return true;
+  }
+
+  public isUserLoggedIn(): boolean {
+    if (this.authService.isUserLoggedIn()) {
+      this.loggedIn = true;
+    }
+    return false;
+  }
+
+  private getUserRole(): string {
+    if (this.authService.getUserFromLocalCache() != null) {
+      for(const role of this.authService.getUserFromLocalCache().roles) {
+        if(role.name == "ROLE_CONTENT_CREATOR") {
+          return role.name;
+        }
+      }
+      for(const role of this.authService.getUserFromLocalCache().roles) {
+        if(role.name == "ROLE_CUSTOMER") {
+          return role.name;
+        }
+      }
+    }
+    return null;
   }
 
 }

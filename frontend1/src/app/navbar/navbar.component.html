@@ -4,12 +4,12 @@
     </div>
     <div class="routes">
         <a routerLink="/home">Home</a>
-        <a routerLink="/store">Store</a>
-        <a *ngIf="loggedIn && contentCreator" routerLink="/manage-packages">Manage Packages</a>
-        <a *ngIf="loggedIn" routerLink="/profile-page">Profile Page</a>
-        <a *ngIf="loggedIn == false" routerLink="/login">Log In</a>
-        <a *ngIf="loggedIn == false" routerLink="/register">Create Account</a>
-        <a *ngIf="loggedIn" routerLink="/" (click)="logOut()">Log Out</a>
+        <a [hidden]="isNone" routerLink="/store">Store</a>
+        <a [hidden]="!isContentCreator" routerLink="/manage-packages">Manage Packages</a>
+        <a [hidden]="isNone" routerLink="/profile-page">Profile Page</a>
+        <a [hidden]="!isNone" routerLink="/login">Log In</a>
+        <a [hidden]="!isNone" routerLink="/register">Create Account</a>
+        <a [hidden]="isNone" (click)="logOut()">Log Out</a>
     </div>
     <button (click)="toggle()" class="hamburger">
         <img *ngIf="showMenu" src="../../assets/images/hamburger_button.svg" alt="menu" class="menuIcon">

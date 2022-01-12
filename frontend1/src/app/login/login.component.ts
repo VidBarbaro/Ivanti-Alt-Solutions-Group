@@ -39,11 +39,13 @@ export class LoginComponent implements OnInit, OnDestroy {
           //this.authenticationService.saveToken(token); // save the token in the local storage
           console.log(response);
           this.authenticationService.addUserToLocalCache(response.body); // add the user to the local storage
-          this.router.navigateByUrl('/home'); // navigate the user back to the home page
+          this.router.navigate(['/home']); // navigate the user back to the home page
           this.showLoading = false; // stop showing loading on button
         },
         (errorResponse: HttpErrorResponse) => {
           this.sendErrorNotification(NotificationType.ERROR, errorResponse.error.message);
+          localStorage.removeItem('user');
+          localStorage.removeItem('username');
           this.showLoading = false;
         }
       )
