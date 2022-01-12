@@ -83,3 +83,27 @@
 {
 	font-size: 17px;
 }
+
+
+.updatePackageInfoButton {
+	margin: 20px;
+	background:linear-gradient(to bottom, #ed2f2f 5%, #961616 100%);
+	background-color:#ed2f2f;
+	border-radius:10px;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-size:17px;
+	padding:10px 25px;
+	text-decoration:none;
+	text-shadow:0px 1px 10px #721717;
+	border: none;
+}
+.updatePackageInfoButton:hover {
+	background:linear-gradient(to bottom, #961616 5%, #ed2f2f 100%);
+	background-color:#961616;
+}
+.updatePackageInfoButton:active {
+	position:relative;
+	top:1px;
+}
