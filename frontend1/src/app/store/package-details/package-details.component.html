@@ -33,27 +33,16 @@
         <button type="button" class="btn-menus" (click)="showOverview()">Overview</button>
         <!-- <button type="button" class="btn-menus" (click)="showReviews()">Reviews</button> -->
         <button type="button" class="btn-menus" (click)="showSystemRequirements()">System requirements</button>
-        <button type="button" class="btn-menus" (click)="showRelated()">Related</button>
     </div>
     <div class="menu-info">
         <h1 class="package-info-title" id="package-info-title">Overview</h1>
-        <p class="package-info-description" id="package-info-description">Overview: Lorem ipsum dolor sit amet,
-            consectetur adipiscing elit,
-            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Ut enim ad minim veniam, quis nostrud
-            exercitation ullamco laboris
-            nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-            cillum dolore eu fugiat
-            nullapariatur.Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit
-            anim
-            idest laborum.</p>
+        <p class="package-info-description" id="package-info-description">{{this.package.description}}</p>
     </div>
     <div class="user-ratings">
         <span class="heading">User Rating</span>
-        <span class="fa fa-star checked"></span>
-        <span class="fa fa-star checked"></span>
-        <span class="fa fa-star checked"></span>
-        <span class="fa fa-star checked"></span>
-        <span class="fa fa-star"></span>
+        <span class="stars-rating" *ngFor="let star of showIcon()">
+            <i class="{{star}}"></i>
+        </span>
         <p>{{averageRating}} average based on {{nrReviews}} reviews.</p>
         <hr style="border:3px solid #f1f1f1">
 
@@ -63,7 +52,6 @@
             </div>
             <div class="middle">
                 <div class="bar-container">
-                    <!-- <div class="bar-5"></div> -->
                     <mat-progress-bar mode="determinate" value="{{barLengh5}}" class="bar-3"></mat-progress-bar>
                 </div>
             </div>
@@ -75,7 +63,6 @@
             </div>
             <div class="middle">
                 <div class="bar-container">
-                    <!-- <div class="bar-4"></div> -->
                     <mat-progress-bar mode="determinate" value="{{barLengh4}}" class="bar-3"></mat-progress-bar>
                 </div>
             </div>
@@ -87,7 +74,6 @@
             </div>
             <div class="middle">
                 <div class="bar-container">
-                    <!-- <div class="bar-3"></div> -->
                     <mat-progress-bar mode="determinate" value="{{barLengh3}}" class="bar-3"></mat-progress-bar>
                 </div>
             </div>
@@ -99,7 +85,6 @@
             </div>
             <div class="middle">
                 <div class="bar-container">
-                    <!-- <div class="bar-2"></div> -->
                     <mat-progress-bar mode="determinate" value="{{barLengh2}}" class="bar-3"></mat-progress-bar>
                 </div>
             </div>
@@ -111,7 +96,6 @@
             </div>
             <div class="middle">
                 <div class="bar-container">
-                    <!-- <div class="bar-1"></div> -->
                     <mat-progress-bar mode="determinate" value="{{barLengh1}}" class="bar-3"></mat-progress-bar>
                 </div>
             </div>

@@ -20,6 +20,8 @@ export class ProfilePageComponent implements OnInit {
   public contentCreatorToShow: string;
   public favouritePackages: Package[];
   public downloadedPackages: Package[];
+  public nrDownloadedPackages: number;
+  public nrFavouritePackages: number;
 
   constructor(private authenticationService: AuthenticationService, private userService: UserService, private notificationService: NotificationService,
     private packageService: PackageService) {
@@ -43,6 +45,7 @@ export class ProfilePageComponent implements OnInit {
     this.packageService.getFavouritePackagesOfUser(this.loggedInUser.id).subscribe(
       (response: Package[]) => {
         this.favouritePackages = response;
+        this.nrFavouritePackages = this.favouritePackages.length
       },
       (errorResponse: HttpErrorResponse) => {
         console.log(errorResponse.message);
@@ -55,6 +58,7 @@ export class ProfilePageComponent implements OnInit {
     this.packageService.getDownloadedPackagesOfUser(this.loggedInUser.id).subscribe(
       (response: Package[]) => {
         this.downloadedPackages = response;
+        this.nrDownloadedPackages = this.downloadedPackages.length;
       },
       (errorResponse: HttpErrorResponse) => {
         console.log(errorResponse.message);

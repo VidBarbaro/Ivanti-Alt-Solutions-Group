@@ -42,6 +42,7 @@ export class PackageDetailsComponent implements OnInit {
   barLengh3: number;
   barLengh4: number;
   barLengh5: number;
+  ratingArr: number[];
 
   constructor(
     private packageService: PackageService,
@@ -58,9 +59,20 @@ export class PackageDetailsComponent implements OnInit {
     this.getPackage();
     this.getReviewsOfPackage();
     this.getAverageRating();
-
   }
 
+  public showIcon() {
+    const stars = [];
+    let j = 0;
+    for (let i = 1; i <= this.averageRating; i++) {
+      stars.push("fa fa-star checked yellow-color");
+      j = i;
+    }
+    if (this.averageRating - j == 0.5) {
+      stars.push("fas fa-star-half yellow-color");
+    }
+    return stars;
+  }
 
   public getPackage(): void {
     this.packageService.getPackageById(this.router.snapshot.params.id).subscribe(
@@ -242,8 +254,7 @@ export class PackageDetailsComponent implements OnInit {
   }
 
   private calculateReviewBarLenght(reviews: number) {
-    if(this.nrReviews !== 0)
-    {
+    if (this.nrReviews !== 0) {
       let value = 100 / this.nrReviews;
       return ((value * reviews));
     }

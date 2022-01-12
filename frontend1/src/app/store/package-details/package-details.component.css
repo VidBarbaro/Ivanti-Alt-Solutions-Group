@@ -46,7 +46,7 @@
 
 .single-package-card
 {
-    background-color: #E8E1D9;
+    background-color: #F7F7F7;
     position: relative;
 }
 
@@ -157,8 +157,9 @@ table
     box-sizing: border-box;
     font-family: Arial;
     /* margin: 20px 30px; */
-    max-width: 90%; /* Max width */
+    max-width: 100%; /* Max width */
     padding: 30px 20px;
+    background-color: #F7F7F7;
 }
   
   .heading {
@@ -287,3 +288,13 @@ ngb-rating
   right: 40px;
 }
 
+
+.yellow-color
+{
+  color: #FFC900;
+}
+
+.stars-rating i
+{
+  font-size: 20px;
+}
