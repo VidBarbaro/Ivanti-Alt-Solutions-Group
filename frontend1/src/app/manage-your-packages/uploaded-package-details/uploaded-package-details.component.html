@@ -39,5 +39,6 @@
         <a routerLink="update-package/{{package.id}}">
             <button class="updatePackageInfoButton" type="button" name="button">Update Package Information</button>
         </a>
+            <button class="updatePackageInfoButton" type="button" name="button" (click)="deletePackage(package.id)">Delete Package</button>
     </div>
 </div>

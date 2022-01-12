@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { CustomHttpResponse } from 'src/app/model/custom-http-response';
 import { Package } from 'src/app/model/package';
 import { PackageService } from 'src/app/_services/package-service/package-service';
 
@@ -11,7 +12,7 @@ import { PackageService } from 'src/app/_services/package-service/package-servic
 export class UploadedPackageDetailsComponent implements OnInit {
   package: Package = null;
 
-  constructor(private packageService: PackageService, private router: ActivatedRoute) { 
+  constructor(private packageService: PackageService, private router: ActivatedRoute, private router1: Router) { 
    }
 
   ngOnInit(): void {
@@ -28,6 +29,14 @@ export class UploadedPackageDetailsComponent implements OnInit {
              
       }
     )
+  }
+
+  public deletePackage(packageId: number): void {
+      this.packageService.deletePackage(packageId).subscribe(
+        (response: CustomHttpResponse) => {
+          this.router1.navigate(["manage-packages"]);
+        },
+      )
   }
 
 }

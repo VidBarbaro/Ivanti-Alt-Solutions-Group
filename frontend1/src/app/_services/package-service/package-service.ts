@@ -148,6 +148,10 @@ export class PackageService {
         });
     }
 
+    public deletePackage(packageId: number): Observable<CustomHttpResponse> {
+        return this.http.delete<CustomHttpResponse>(`${this.host}/api/packages/delete/${packageId}`);
+    }
+
     public addVersionToPackage(idPackage: number, versionName: string, versionReadMe: string): Observable<Package> {
         return this.http.post<Package>(`${this.host}/api/packages/add-version/${idPackage}`, { "name": versionName, "readme": versionReadMe });
     }
