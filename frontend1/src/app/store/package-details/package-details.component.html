@@ -7,19 +7,7 @@
         <div class="package-details">
             <div class="package-name">
                 <h1>{{package.title}}</h1>
-                <div>
-                    <button mat-raised-button (click)="removePackageFromFavourites(user.id, package.id)"
-                        *ngIf="isPackageFavourite">
-                        Remove from favourites
-                        <mat-icon>star</mat-icon>
-                    </button>
-                    <button mat-raised-button (click)="addPackageToFavourites(user.id, package.id)"
-                        *ngIf="!isPackageFavourite">
-                        Add to favourites
-                        <mat-icon>star</mat-icon>
-                    </button>
-                    <p>{{message}}</p>
-                </div>
+
             </div>
             <div class="package-subtitle">
                 <h2>Creator: {{package.creator.name}}</h2>
@@ -29,6 +17,16 @@
                     {{package.intro}}
                 </p>
             </div>
+            <button class="addRemoveFavouritePackage" mat-raised-button
+                (click)="removePackageFromFavourites(user.id, package.id)" *ngIf="isPackageFavourite">
+                Remove from favourites
+                <mat-icon>star</mat-icon>
+            </button>
+            <button class="addRemoveFavouritePackage" mat-raised-button
+                (click)="addPackageToFavourites(user.id, package.id)" *ngIf="!isPackageFavourite">
+                Add to favourites
+                <mat-icon>star</mat-icon>
+            </button>
         </div>
     </div>
     <div class="buttons-details">

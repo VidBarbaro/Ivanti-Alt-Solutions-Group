@@ -20,3 +20,14 @@
 {
     background: linear-gradient(90deg, rgba(76,4,139,1) 24%, rgba(226,18,37,1) 58%);
 }
+
+.uploaded-packages-title{
+    margin-top: 60px;
+    margin-bottom: 60px;
+    text-align: center;
+    font-size: 40px;
+}
+
+.uploaded-packages-container{
+    display: flex;
+}
