@@ -31,6 +31,7 @@ export class StoreComponent implements OnInit {
     //   this.router.navigateByUrl('/login');
     // }
     this.showPackages();
+    
   }
 
   public showPackages(): void {
@@ -49,10 +50,23 @@ export class StoreComponent implements OnInit {
     );
   }
 
-  public searchPackages(searchTerm: string): void {
+  public searchPackagesByName(searchTerm: string): void {
     const results: Package[] = [];
     for (const aPackage of this.packages) {
       if (aPackage.title.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1) {
+            results.push(aPackage);
+      }
+    }
+    this.packages = results;
+    if (results.length == 0 || !searchTerm) {
+      this.showPackages()
+    }
+  }
+
+  public searchPackagesByCreator(searchTerm: string): void {
+    const results: Package[] = [];
+    for (const aPackage of this.packages) {
+      if (aPackage.creator.username.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1) {
             results.push(aPackage);
       }
     }
