@@ -47,6 +47,7 @@
 .single-package-card
 {
     background-color: #E8E1D9;
+    position: relative;
 }
 
 .single-package-card
@@ -280,4 +281,9 @@ ngb-rating
   margin-left: 20px;
 }
 
+.addRemoveFavouritePackage{
+  position: absolute;
+  top: 40px;
+  right: 40px;
+}
 
