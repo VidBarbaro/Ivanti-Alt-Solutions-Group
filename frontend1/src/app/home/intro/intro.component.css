@@ -14,6 +14,11 @@
     padding: 0 50px;
 }
 
+span{
+    font-style: italic;
+    font-weight: 700;
+}
+
 .main-heading
 {
     color: #ffff;
@@ -44,12 +49,18 @@
 {
     color: red;
     font-size: 1.3rem;
-    font-weight: bold;
-    padding: 15px 3.5rem;
+    font-weight: 500;
+    padding: 15px 45px;
     border: none;
     border-radius: 10rem;
     display: inline-flex;
     align-items: center;
     background-color: #ffff;
     text-decoration: none;
+    transition: 0.5s;
+}
+
+.btn-see-more:hover{
+    background-color: rgb(90, 68, 143);
+    color: white;
 }

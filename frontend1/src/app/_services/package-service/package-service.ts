@@ -23,6 +23,10 @@ export class PackageService {
         return this.http.get<Package[]>(`${this.host}/api/packages`, { observe: 'response' });
     }
 
+    public getFirst3Packages(): Observable<HttpResponse<Package[]>> {
+        return this.http.get<Package[]>(`${this.host}/api/packages/first3packages`, { observe: 'response' });
+    }
+
     //   public addPackage(formData: FormData): Observable<Package | HttpErrorResponse> {
     //     return this.http.post<Package>(`${this.host}/user/add`, formData);
     //   }
