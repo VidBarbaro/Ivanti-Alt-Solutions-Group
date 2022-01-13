@@ -4,7 +4,7 @@
     </div>
     <div class="routes">
         <a routerLink="/home">Home</a>
-        <a [hidden]="isNone" routerLink="/store">Store</a>
+        <a routerLink="/store">Store</a>
         <a [hidden]="!isContentCreator" routerLink="/manage-packages">Manage Packages</a>
         <a [hidden]="isNone" routerLink="/profile-page">Profile Page</a>
         <a [hidden]="!isNone" routerLink="/login">Log In</a>
