@@ -56,7 +56,7 @@ public class UserRepositoryTest {
 
     // the when setting the password the user is being null
     @Test
-    @Disabled
+   // @Disabled
     void SaveNewUser() {
         NewUserDTO newUserDTO = new NewUserDTO(1,"John Doe","johnny","john123456", "johnny@gmail.com","ROLE_CUSTOMER");
         userService.saveUser(newUserDTO);
