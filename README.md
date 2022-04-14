@@ -45,3 +45,11 @@ The idea behind Ivanti Marketplace web app is that it is an online file and pack
 7. As a content creator uploading a package to the store is as easy as it gets. You have to write out the basic information required for every package and you can add it to the marketplace. If the package gets an update in the future you can add that and change the system requirements if necessary </br> </br>
 ![ivanti6](https://user-images.githubusercontent.com/76628104/163408939-43a20c70-87a1-4238-890c-d10d54dae340.JPG)
 </br> </br>
+
+### How to run the project
+
+1. Install Java Spring Boot
+2. Install Angular CLI
+3. Install MongoDB
+4. Open the backend folder in IntelliJ and run the code from there
+5. Open the frontend1 folder in a text editor and run it with ng serve command
